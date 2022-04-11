@@ -10,6 +10,8 @@
 </head>
 <body>
 <h1>Wish List</h1>
+<h2>ログイン画面</h2>
+
 
 </body>
-</html>>
+</html>
