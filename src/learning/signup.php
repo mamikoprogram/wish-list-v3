@@ -6,7 +6,7 @@ $name = '';
 $email = '';
 $password = '';
 
-if (isset($_POST['email'])) {
+if (isset($_POST['email']) && isset($_POST['password'])) {
 //    POSTの値を取得
     $name = $_POST['name'];
     $email = $_POST['email'];

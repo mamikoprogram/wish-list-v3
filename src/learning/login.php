@@ -1,38 +1,39 @@
 <?php
-require_once "../include/const.php";
 
+require_once "../include/const.php";
+session_start();
 //変数を初期化
 $error = '';
 $email = '';
 $password = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //POSTの値を受け取る
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+$password = filter_input(INPUT_POST, 'password', FILTER_VALIDATE_INT);
 
-    if (isset($email)) {
-        try {
-            // データベース接続
-            $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+//    if ($email !== '' && $password !== '') {
+if (!empty($email && $password)) {
+    try {
+        // データベース接続
+        $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+        //ユーザー登録されているか確認
+        $sql = "SELECT * FROM users WHERE email = :email and password = :password";
+        $stmt = $dbh->prepare($sql);
+//            $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+        $user = $stmt->fetch();
 
-            //ユーザー登録されているか確認
-            $sql = "SELECT * FROM users WHERE email = :email";
-            $stmt = $dbh->prepare($sql);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-            $user = $stmt->fetch();
-
-            if ($user['email'] === $email) {
-                header('location: http://localhost:8080/index.php');
-            }
-        } catch (PDOException $e) {
-            echo 'ログインできませんでした。';
-            exit;
+        if ($user['email'] == $email && $user['password'] == $password) {
+            $_SESSION['email'] = $email;
+            header('location: http://localhost:8080/index.php');
         }
+    } catch (PDOException $error) {
+        echo $error;
+        exit;
     }
 }
 

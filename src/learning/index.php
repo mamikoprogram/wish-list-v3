@@ -1,3 +1,9 @@
+<?php
+session_start();
+$email = $_SESSION['email'];
+
+?>
+
 <!doctype html>
 <html lang="ja">
 <head>
