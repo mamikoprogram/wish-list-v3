@@ -9,10 +9,10 @@ $password = '';
 
 //POSTの値を受け取る
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$password = filter_input(INPUT_POST, 'password', FILTER_VALIDATE_INT);
+$password = filter_input(INPUT_POST, 'password');
 
-//    if ($email !== '' && $password !== '') {
-if (!empty($email && $password)) {
+//if (isset($email) && isset($password)) {
+if (!empty($email) && !empty($password)) {
     try {
         // データベース接続
         $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
@@ -21,18 +21,19 @@ if (!empty($email && $password)) {
         //ユーザー登録されているか確認
         $sql = "SELECT * FROM users WHERE email = :email and password = :password";
         $stmt = $dbh->prepare($sql);
-//            $stmt->bindParam(':name', $name);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':password', $password);
         $stmt->execute();
         $user = $stmt->fetch();
 
-        if ($user['email'] == $email && $user['password'] == $password) {
+        if ($user['email'] === $email && $user['password'] === $password) {
             $_SESSION['email'] = $email;
             header('location: http://localhost:8080/index.php');
+        } else {
+            echo "ログインできませんでした。";
         }
     } catch (PDOException $error) {
-        echo $error;
+        echo "ユーザー登録してください。";
         exit;
     }
 }
@@ -54,13 +55,6 @@ if (!empty($email && $password)) {
 <form action="" method="POST">
     <label for="mail">メールアドレス</label><br>
     <input type="text" name="email" id="mail"><br>
-    <!--    入力不備でエラー表示する-->
-    <!--    --><?php
-    //    if ($error['login'] === 'blank'): ?>
-    <!--        <p class="error">メールアドレスとパスワードを入力してください。</p>-->
-    <!--    --><?php
-    //    endif; ?>
-    <!--    <p class="error">ログインできません。正しく入力してください。</p>-->
     <label for="pass">パスワード</label><br>
     <input type="password" name="password" id="pass"><br>
     <input type="submit" value="ログインする">

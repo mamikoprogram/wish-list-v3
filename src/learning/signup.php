@@ -32,10 +32,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $stmt->execute();
     header('location: http://localhost:8080/login.php');
 }
-//} else {
-//    echo 'ユーザー登録できませんでした。';
-//    exit();
-//}
+
 ?>
 
 <!doctype html>
@@ -61,7 +58,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     <!--        <p>メールアドレスを正しく入力してください。</p>-->
     <!--    --><?php
     //    endif; ?>
-    <label for="password">パスワード(４〜８桁の数字)</label><br>
+    <label for="password">パスワード</label><br>
     <input type="password" name="password" id="password"><br>
     <!--    --><?php
     //    if ($error === 'blank'): ?>
