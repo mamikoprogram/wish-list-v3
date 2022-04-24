@@ -55,7 +55,7 @@ if (!empty($email) && !empty($password)) {
 <form action="" method="POST">
     <label for="mail">メールアドレス</label><br>
     <input type="text" name="email" id="mail"><br>
-    <label for="pass">パスワード</label><br>
+    <label for="pass">パスワード<br>（６文字以上１２文字以内）</label><br>
     <input type="password" name="password" id="pass"><br>
     <input type="submit" value="ログインする">
 </form>

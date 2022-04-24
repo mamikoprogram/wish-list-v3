@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $email = $_SESSION['email'];
 
@@ -16,5 +17,7 @@ $email = $_SESSION['email'];
 </head>
 <body>
 <h1>Wish List</h1>
+<p>こんにちは<?php
+    echo $email ?></p>
 </body>
 </html>
