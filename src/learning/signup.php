@@ -6,35 +6,43 @@ require_once "../include/const.php";
 $name = '';
 $email = '';
 $password = '';
-//！配列でやったほうがいいのか悩み中
-$error = '';
+$errorList = array();
 
-if ($_SERVER['REQUEST_METHOD'] === $_POST) {
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //メールとパスワードが空かチェック
     if (empty($_POST['email']) || empty($_POST['password'])) {
-        $error = " blank";
+        $errorList['blank'] = 'メールアドレスとパスワードを入力してください';
     }
 
 //メールとパスワードが空白かチェック
     if ($_POST['email'] === '' || $_POST['password'] === '') {
-        $error = "blank";
+        $errorList['blank'] = 'メールアドレスとパスワードを入力してください';
     }
 
 //メールの形式になっているかチェック
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
     if ($email === '') {
-        $error = "blank";
+        $errorList['mail'] = 'メールアドレスを正しく入力してください';
     }
 
 //パスワードの文字数チェック（６文字以上１２文字以内）
     $pw = mb_strlen($_POST['password']);
     if ($pw < 6 || $pw > 12) {
-        $error = "pass";
+        $errorList['pass'] = 'パスワードは６文字以上１２文字以内で入力してください';
     }
+
+//エラーを表示する
+//    if (!empty($errorList)) {
+//        foreach ($errorList as $error) {
+//            echo $error;
+//            echo '<br>';
+//        }
+//    }
 
 //    ！条件式がおかしいので修正予定
 //チェックがOKならユーザー登録する
-    if (empty($error)) {
+    if (empty($errorList)) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -45,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === $_POST) {
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         } catch
-        (PDOException $e) {
-            echo 'データベースに接続できませんでした。';
+        (PDOException $error) {
+            echo 'DB接続エラー';
             exit;
         }
         $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
@@ -56,8 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === $_POST) {
         $stmt->bindParam(':PASSWORD', $password);
         $stmt->execute();
         header('location: http://localhost:8080/login.php');
-    } else {
-        echo "メールアドレスとパスワードを入力してください";
     }
 }
 ?>
@@ -75,13 +81,17 @@ if ($_SERVER['REQUEST_METHOD'] === $_POST) {
 <body>
 <h1>Wish List</h1>
 <h2>ユーザー登録</h2>
-<!--！エラーメッセージの表示の作業中-->
 <?php
-//if (!empty($error)): ?>
-<!--    --><?php
-//    echo $error; ?>
+if (!empty($errorList)): ?>
+    <?php
+    foreach ($errorList as $error): ?>
+        <?php
+        echo $error; ?>
+        <br>
+    <?php
+    endforeach; ?>
 <?php
-//endif; ?>
+endif; ?>
 <form action="" method="POST">
     <label for="name">ニックネーム</label><br>
     <input type="text" name="name" id="name"><br>
