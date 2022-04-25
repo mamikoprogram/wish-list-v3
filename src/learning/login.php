@@ -3,38 +3,54 @@
 require_once "../include/const.php";
 session_start();
 //変数を初期化
-$error = '';
+$name = '';
 $email = '';
 $password = '';
+$error = '';
 
-//POSTの値を受け取る
-$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$password = filter_input(INPUT_POST, 'password');
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //メールとパスワードが空かチェック
+    if (empty($_POST['email']) || empty($_POST['password'])) {
+        $error = 'メールアドレスかパスワードが正しくありません';
+    }
 
-//if (isset($email) && isset($password)) {
-if (!empty($email) && !empty($password)) {
-    try {
-        // データベース接続
-        $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        //ユーザー登録されているか確認
-        $sql = "SELECT * FROM users WHERE email = :email and password = :password";
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':password', $password);
-        $stmt->execute();
-        $user = $stmt->fetch();
+//メールとパスワードが空白かチェック
+    if ($_POST['email'] === '' || $_POST['password'] === '') {
+        $error = 'メールアドレスかパスワードが正しくありません';
+    }
 
-        if ($user['email'] === $email && $user['password'] === $password) {
-            $_SESSION['email'] = $email;
-            header('location: http://localhost:8080/index.php');
-        } else {
-            echo "ログインできませんでした。";
+//パスワードの文字数チェック（６文字以上１２文字以内）
+    $pw = mb_strlen($_POST['password']);
+    if ($pw < 6 || $pw > 12) {
+        $error = 'メールアドレスかパスワードが正しくありません';
+    }
+
+    if ($error === '') {
+        try {
+            // データベース接続
+            $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            //ユーザー登録されているか確認
+            $sql = "SELECT * FROM users WHERE name = :NAME and email = :EMAIL and password = :PASSWORD";
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindParam(':NAME', $name);
+            $stmt->bindParam(':EMAIL', $email);
+            $stmt->bindParam(':PASSWORD', $password);
+            $stmt->execute();
+            $user = $stmt->fetch();
+
+            if ($user['email'] === $_POST['email'] && $user['password'] === $_POST['password']) {
+                $_SESSION['email'] = $email;
+//                $_SESSION['name'] = $name;
+                header('location: http://localhost:8080/index.php');
+            } else {
+                echo "ログインできませんでした。";
+            }
+        } catch (PDOException $error) {
+            echo "ユーザー登録してください。";
+            exit;
         }
-    } catch (PDOException $error) {
-        echo "ユーザー登録してください。";
-        exit;
     }
 }
 
@@ -52,9 +68,13 @@ if (!empty($email) && !empty($password)) {
 <body>
 <h1>Wish List</h1>
 <h2>ログイン</h2>
+<?php if(!empty($error)): ?>
+<?php echo $error ?>
+<?php endif; ?>
+
 <form action="" method="POST">
     <label for="mail">メールアドレス</label><br>
-    <input type="text" name="email" id="mail"><br>
+    <input type="email" name="email" id="mail"><br>
     <label for="pass">パスワード<br>（６文字以上１２文字以内）</label><br>
     <input type="password" name="password" id="pass"><br>
     <input type="submit" value="ログインする">

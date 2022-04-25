@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: db
--- 生成日時: 2022 年 4 月 17 日 13:40
+-- 生成日時: 2022 年 4 月 25 日 02:20
 -- サーバのバージョン： 5.7.36
 -- PHP のバージョン: 8.0.15
 
@@ -39,9 +39,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-                                                            (16, 'テスト１', 'test1@gmail.com', '1111'),
-                                                            (17, 'テスト２', 'test2@gmail.com', '2222'),
-                                                            (18, 'テスト３', 'test3@gmail.com', '3333');
+                                                            (33, 'テスト１', 'test1@gmail.com', '111111'),
+                                                            (34, 'テスト２', 'test2@gmail.com', '222222222222'),
+                                                            (35, 'テスト３', 'test3@gmail.com', '333333'),
+                                                            (36, 'テスト４', 'test4@mail.com', '444444');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -61,7 +62,7 @@ ALTER TABLE `users`
 -- テーブルの AUTO_INCREMENT `users`
 --
 ALTER TABLE `users`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
