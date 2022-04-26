@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            //ユーザー登録されているか確認
+            //ユーザー登録の情報を呼び出す
             $sql = "SELECT * FROM users WHERE email = :EMAIL and password = :PASSWORD";
             $stmt = $dbh->prepare($sql);
             $stmt->bindParam(':EMAIL', $email);

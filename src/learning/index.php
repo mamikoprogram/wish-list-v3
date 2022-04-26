@@ -2,9 +2,6 @@
 
 session_start();
 $email = $_SESSION['email'];
-//$name = $_SESSION['name'];
-
-
 ?>
 
 <!doctype html>
