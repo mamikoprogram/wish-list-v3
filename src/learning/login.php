@@ -9,6 +9,9 @@ $password = '';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
     //メールとパスワードが空かチェック
     if (empty($_POST['email']) || empty($_POST['password'])) {
         $error = 'メールアドレスかパスワードが正しくありません';
@@ -32,15 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             //ユーザー登録されているか確認
-            $sql = "SELECT * FROM users WHERE name = :NAME and email = :EMAIL and password = :PASSWORD";
+            $sql = "SELECT * FROM users WHERE email = :EMAIL and password = :PASSWORD";
             $stmt = $dbh->prepare($sql);
-            $stmt->bindParam(':NAME', $name);
             $stmt->bindParam(':EMAIL', $email);
             $stmt->bindParam(':PASSWORD', $password);
             $stmt->execute();
             $user = $stmt->fetch();
+            var_dump($user);
 
-            if ($user['email'] === $_POST['email'] && $user['password'] === $_POST['password']) {
+//            メールアドレスとパスワードが一致したらログイン
+            if ($user['email'] === $email && $user['password'] === $password) {
                 $_SESSION['email'] = $email;
 //                $_SESSION['name'] = $name;
                 header('location: http://localhost:8080/index.php');
@@ -68,9 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <h1>Wish List</h1>
 <h2>ログイン</h2>
-<?php if(!empty($error)): ?>
-<?php echo $error ?>
-<?php endif; ?>
+<?php
+if (!empty($error)): ?>
+    <?php
+    echo $error ?>
+<?php
+endif; ?>
 
 <form action="" method="POST">
     <label for="mail">メールアドレス</label><br>
