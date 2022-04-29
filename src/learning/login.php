@@ -1,6 +1,7 @@
 <?php
 
 require_once "../include/const.php";
+
 session_start();
 //変数を初期化
 $name = '';
@@ -45,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //            メールアドレスとパスワードが一致したらログイン
             if ($user['email'] === $email && $user['password'] === $password) {
-                $_SESSION['email'] = $email;
-//                $_SESSION['name'] = $name;
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['name'] = $user['name'];
                 header('location: http://localhost:8080/index.php');
             } else {
                 echo "ログインできませんでした。";

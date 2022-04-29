@@ -32,15 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errorList['pass'] = 'パスワードは６文字以上１２文字以内で入力してください';
     }
 
-//エラーを表示する
-//    if (!empty($errorList)) {
-//        foreach ($errorList as $error) {
-//            echo $error;
-//            echo '<br>';
-//        }
-//    }
-
-//    ！条件式がおかしいので修正予定
 //チェックがOKならユーザー登録する
     if (empty($errorList)) {
         $name = $_POST['name'];

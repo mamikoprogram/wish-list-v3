@@ -2,6 +2,10 @@
 
 session_start();
 $email = $_SESSION['email'];
+$name = $_SESSION['name'];
+
+require_once "../include/function.php";
+
 ?>
 
 <!doctype html>
@@ -17,15 +21,15 @@ $email = $_SESSION['email'];
 <body>
 <h1>Wish List</h1>
 <p>こんにちは<?php
-    if (isset($name)): ?>
+    if (!empty($name)): ?>
+<!--    hはXSS対策-->
         <?php
-        echo $name ?>
+        echo h($name) ?>
     <?php
     else: ?>
         <?php
-        echo $email ?>
+        echo h($email) ?>
     <?php
-    endif; ?>
-</p>
+    endif; ?>さん</p>
 </body>
 </html>
