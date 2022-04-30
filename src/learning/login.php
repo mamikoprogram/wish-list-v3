@@ -9,6 +9,14 @@ $email = '';
 $password = '';
 $error = '';
 
+//XSRF対策　トークンの生成
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $token = bin2hex(random_bytes(16));
+    $_SESSION['token'] = $token;
+//    トークン確認用
+    var_dump($token);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -18,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'メールアドレスかパスワードが正しくありません';
     }
 
-//メールとパスワードが空白かチェック
+    //メールとパスワードが空白かチェック
     if ($_POST['email'] === '' || $_POST['password'] === '') {
         $error = 'メールアドレスかパスワードが正しくありません';
     }
 
-//パスワードの文字数チェック（６文字以上１２文字以内）
+    //パスワードの文字数チェック（６文字以上１２文字以内）
     $pw = mb_strlen($_POST['password']);
     if ($pw < 6 || $pw > 12) {
         $error = 'メールアドレスかパスワードが正しくありません';
@@ -44,13 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $stmt->fetch();
             var_dump($user);
 
-//            メールアドレスとパスワードが一致したらログイン
-            if ($user['email'] === $email && $user['password'] === $password) {
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['name'] = $user['name'];
-                header('location: http://localhost:8080/index.php');
-            } else {
-                echo "ログインできませんでした。";
+            //条件が一致したらログイン
+            if ($_SESSION['token'] === $_POST['token']) {
+                if ($user['email'] === $email && $user['password'] === $password) {
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['name'] = $user['name'];
+                    header('location: http://localhost:8080/index.php');
+                } else {
+                    echo "ログインできませんでした。";
+                }
             }
         } catch (PDOException $error) {
             echo "ユーザー登録してください。";
@@ -85,6 +95,8 @@ endif; ?>
     <input type="email" name="email" id="mail"><br>
     <label for="pass">パスワード<br>（６文字以上１２文字以内）</label><br>
     <input type="password" name="password" id="pass"><br>
+    <input type="hidden" name="token" value="<?php
+    echo $_SESSION['token']; ?>">
     <input type="submit" value="ログインする">
 </form>
 <a href="signup.php">新規ユーザー登録はこちら</a>

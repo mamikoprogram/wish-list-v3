@@ -3,6 +3,8 @@
 session_start();
 $email = $_SESSION['email'];
 $name = $_SESSION['name'];
+//トークン確認用
+var_dump($_SESSION['token']);
 
 require_once "../include/function.php";
 
