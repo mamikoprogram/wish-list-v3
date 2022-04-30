@@ -1,15 +1,29 @@
 <?php
 
-session_start();
-$email = $_SESSION['email'];
-$name = $_SESSION['name'];
-//トークン確認用
-var_dump($_SESSION['token']);
+require_once "../include/initialize.php";
+$user = [];
+try {
+    $db = db();
+    $user = getUserById($db, $_SESSION['id'] ?? null);
+} catch (Exception $e) {
+}
 
-require_once "../include/function.php";
+/**
+ * @param  array  $user
+ *
+ * @return string
+ * @noinspection PhpPureAttributeCanBeAddedInspection
+ */
+function getUserInfo(array $user): string
+{
+    if (empty($user)) {
+        return '';
+    }
+
+    return h("{$user['name']}({$user['email']})さん");
+}
 
 ?>
-
 <!doctype html>
 <html lang="ja">
 <head>
@@ -23,15 +37,6 @@ require_once "../include/function.php";
 <body>
 <h1>Wish List</h1>
 <p>こんにちは<?php
-    if (!empty($name)): ?>
-<!--    hはXSS対策-->
-        <?php
-        echo h($name) ?>
-    <?php
-    else: ?>
-        <?php
-        echo h($email) ?>
-    <?php
-    endif; ?>さん</p>
+    echo getUserInfo($user); ?></p>
 </body>
 </html>
