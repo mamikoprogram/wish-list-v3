@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: db
--- 生成日時: 2022 年 4 月 29 日 13:53
+-- 生成日時: 2022 年 5 月 09 日 02:22
 -- サーバのバージョン： 5.7.36
 -- PHP のバージョン: 8.0.15
 
@@ -31,7 +31,7 @@ CREATE TABLE `users` (
                          `id` int(11) NOT NULL,
                          `name` text,
                          `email` text,
-                         `password` text
+                         `password` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -39,9 +39,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-                                                            (33, 'テスト１', 'test1@gmail.com', '111111'),
-                                                            (34, 'テスト２', 'test2@gmail.com', '222222222222'),
-                                                            (40, '<script>alert(!)</script>', 'waruihito@gmail.com', '444444');
+                                                            (41, 'テスト１', 'test1@gmail.com', '111111'),
+                                                            (42, 'テスト２', 'test2@gmail.com', '222222222222'),
+                                                            (43, '<script>！！！</script>', 'script@gmail.com', '333333');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -61,7 +61,7 @@ ALTER TABLE `users`
 -- テーブルの AUTO_INCREMENT `users`
 --
 ALTER TABLE `users`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

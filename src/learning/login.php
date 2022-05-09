@@ -1,21 +1,12 @@
 <?php
+require_once "../include/initialize.php";
 
-require_once "../include/const.php";
-
-session_start();
 //変数を初期化
 $name = '';
 $email = '';
 $password = '';
-$error = '';
+$errors = '';
 
-//XSRF対策　トークンの生成
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $token = bin2hex(random_bytes(16));
-    $_SESSION['token'] = $token;
-//    トークン確認用
-    var_dump($token);
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -23,21 +14,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //メールとパスワードが空かチェック
     if (empty($_POST['email']) || empty($_POST['password'])) {
-        $error = 'メールアドレスかパスワードが正しくありません';
+        $error[] = 'メールアドレスかパスワードが正しくありません';
     }
 
     //メールとパスワードが空白かチェック
     if ($_POST['email'] === '' || $_POST['password'] === '') {
-        $error = 'メールアドレスかパスワードが正しくありません';
+        $error[] = 'メールアドレスかパスワードが正しくありません';
     }
 
     //パスワードの文字数チェック（６文字以上１２文字以内）
     $pw = mb_strlen($_POST['password']);
     if ($pw < 6 || $pw > 12) {
-        $error = 'メールアドレスかパスワードが正しくありません';
+        $error[] = 'メールアドレスかパスワードが正しくありません';
     }
 
-    if ($error === '') {
+    if ($errors === '') {
         try {
             // データベース接続
             $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
@@ -84,10 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <h1>Wish List</h1>
 <h2>ログイン</h2>
 <?php
-if (!empty($error)): ?>
-    <?php
-    echo $error ?>
-<?php
+if (!empty($errors)):
+    foreach ($errors as $error) {
+        echo $error;
+    }
 endif; ?>
 
 <form action="" method="POST">

@@ -1,12 +1,9 @@
 <?php
 
-session_start();
+require_once "../include/initialize.php";
+
 $email = $_SESSION['email'];
 $name = $_SESSION['name'];
-//トークン確認用
-var_dump($_SESSION['token']);
-
-require_once "../include/function.php";
 
 ?>
 
@@ -23,15 +20,11 @@ require_once "../include/function.php";
 <body>
 <h1>Wish List</h1>
 <p>こんにちは<?php
-    if (!empty($name)): ?>
-<!--    hはXSS対策-->
-        <?php
-        echo h($name) ?>
-    <?php
-    else: ?>
-        <?php
-        echo h($email) ?>
-    <?php
+    if (!empty($name)):
+//        hはXSS対策
+        echo h($name);
+    else:
+        echo h($email);
     endif; ?>さん</p>
 </body>
 </html>
