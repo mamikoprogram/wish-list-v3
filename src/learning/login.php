@@ -1,31 +1,52 @@
 <?php
+
 require_once "../include/initialize.php";
 
-//変数を初期化
-$name = '';
-$email = '';
-$password = '';
-$errors = '';
-
-
+//作業中
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $errors = validate();
+
+    if (empty($errors)) {
+        try {
+//            DB接続
+//            ユーザー認証
+//            もし＄Userが空じゃなけれidをセッションへ入れてindex.phpへ
+            $errors[] = 'ログインできませんでした。';
+        } catch (Exception$exception) {
+            $errors[] = "ログインできませんでした。";
+        }
+    }
+}
+
+function validate(): array
+{
+    $errors = [];
+
+    if ($_SESSION['token'] !== $_POST['token']) {
+        $errors[] = 'トークンが正しくありません。';
+    }
 
     //メールとパスワードが空かチェック
     if (empty($_POST['email']) || empty($_POST['password'])) {
-        $error[] = 'メールアドレスかパスワードが正しくありません';
+        $errors[] = 'メールアドレスかパスワードが正しくありません';
     }
 
     //メールとパスワードが空白かチェック
     if ($_POST['email'] === '' || $_POST['password'] === '') {
-        $error[] = 'メールアドレスかパスワードが正しくありません';
+        $errors[] = 'メールアドレスかパスワードが正しくありません';
     }
+    return $errors;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = makeSecurePassword($_POST['password']);
+
 
     //パスワードの文字数チェック（６文字以上１２文字以内）
     $pw = mb_strlen($_POST['password']);
     if ($pw < 6 || $pw > 12) {
-        $error[] = 'メールアドレスかパスワードが正しくありません';
+        $errors[] = 'メールアドレスかパスワードが正しくありません';
     }
 
     if ($errors === '') {

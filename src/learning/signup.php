@@ -1,6 +1,6 @@
 <?php
 
-require_once "../include/const.php";
+require_once "../include/initialize.php";
 
 //変数を初期化
 $name = '';
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errorList)) {
         $name = $_POST['name'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = makeSecurePassword($_POST['password']);
 
         try {
             // データベース接続
