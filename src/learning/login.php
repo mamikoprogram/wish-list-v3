@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
-//            DB接続
+            $db = db();
 //            ユーザー認証
 //            もし＄Userが空じゃなけれidをセッションへ入れてindex.phpへ
             $errors[] = 'ログインできませんでした。';

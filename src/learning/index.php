@@ -2,8 +2,6 @@
 
 require_once "../include/initialize.php";
 
-$email = $_SESSION['email'];
-$name = $_SESSION['name'];
 
 ?>
 

@@ -40,9 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // データベース接続
-            $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $dbh = db();
         } catch
         (PDOException $error) {
             echo 'DB接続エラー';
