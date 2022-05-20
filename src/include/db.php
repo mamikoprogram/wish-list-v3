@@ -9,12 +9,17 @@ function db(): PDO
 }
 
 //作業中 この関数の使い方はもう少し理解を深める必要あり
-function select(PDO $db, string $sql, array $binds = [])
+
+function select(PDO $dbh, string $sql, array $binds = []): PDOStatement
 {
-    $stmt = $db->prepare($sql);
+    $stmt = $dbh->prepare($sql);
     if (false === $stmt) {
-        throw new Exception('SQL error');
+        throw new Exception('sql error');
     }
-//    ???
 //    foreach ()の$bindsの中身確認
+    foreach ($binds as $key => $value) {
+        $stmt->bindParam($key, $value);
+    }
+    $stmt->execute();
+    return $stmt;
 }

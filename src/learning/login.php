@@ -8,9 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
-            $db = db();
+            $dbh = db();
 //            ユーザー認証
-//            もし＄Userが空じゃなけれidをセッションへ入れてindex.phpへ
+            $user = getUserByAuth($dbh, $_POST['email'], $_POST['password']);
+            if (!empty($user)) {
+                $_SESSION['id'] = $user['id'];
+                header('location:http://localhost:8080/index.php');
+                exit;
+            }
             $errors[] = 'ログインできませんでした。';
         } catch (Exception$exception) {
             $errors[] = "ログインできませんでした。";
@@ -38,48 +43,48 @@ function validate(): array
     return $errors;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = makeSecurePassword($_POST['password']);
-
-
-    //パスワードの文字数チェック（６文字以上１２文字以内）
-    $pw = mb_strlen($_POST['password']);
-    if ($pw < 6 || $pw > 12) {
-        $errors[] = 'メールアドレスかパスワードが正しくありません';
-    }
-
-    if ($errors === '') {
-        try {
-            // データベース接続
-            $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            //ユーザー登録の情報を呼び出す
-            $sql = "SELECT * FROM users WHERE email = :EMAIL and password = :PASSWORD";
-            $stmt = $dbh->prepare($sql);
-            $stmt->bindParam(':EMAIL', $email);
-            $stmt->bindParam(':PASSWORD', $password);
-            $stmt->execute();
-            $user = $stmt->fetch();
-            var_dump($user);
-
-            //条件が一致したらログイン
-            if ($_SESSION['token'] === $_POST['token']) {
-                if ($user['email'] === $email && $user['password'] === $password) {
-                    $_SESSION['email'] = $user['email'];
-                    $_SESSION['name'] = $user['name'];
-                    header('location: http://localhost:8080/index.php');
-                } else {
-                    echo "ログインできませんでした。";
-                }
-            }
-        } catch (PDOException $error) {
-            echo "ユーザー登録してください。";
-            exit;
-        }
-    }
-}
+//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//    $email = $_POST['email'];
+//    $password = makeSecurePassword($_POST['password']);
+//
+//
+//    //パスワードの文字数チェック（６文字以上１２文字以内）
+//    $pw = mb_strlen($_POST['password']);
+//    if ($pw < 6 || $pw > 12) {
+//        $errors[] = 'メールアドレスかパスワードが正しくありません';
+//    }
+//
+//    if ($errors === '') {
+//        try {
+//            // データベース接続
+//            $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
+//            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//            $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+//            //ユーザー登録の情報を呼び出す
+//            $sql = "SELECT * FROM users WHERE email = :EMAIL and password = :PASSWORD";
+//            $stmt = $dbh->prepare($sql);
+//            $stmt->bindParam(':EMAIL', $email);
+//            $stmt->bindParam(':PASSWORD', $password);
+//            $stmt->execute();
+//            $user = $stmt->fetch();
+//            var_dump($user);
+//
+//            //条件が一致したらログイン
+//            if ($_SESSION['token'] === $_POST['token']) {
+//                if ($user['email'] === $email && $user['password'] === $password) {
+//                    $_SESSION['email'] = $user['email'];
+//                    $_SESSION['name'] = $user['name'];
+//                    header('location: http://localhost:8080/index.php');
+//                } else {
+//                    echo "ログインできませんでした。";
+//                }
+//            }
+//        } catch (PDOException $error) {
+//            echo "ユーザー登録してください。";
+//            exit;
+//        }
+//    }
+//}
 
 ?>
 <!doctype html>

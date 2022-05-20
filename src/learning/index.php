@@ -1,6 +1,23 @@
 <?php
 
 require_once "../include/initialize.php";
+$user = [];
+
+try {
+    $db = db();
+    $user = getUserById($dbh, $_SESSION['id'] ?? null);
+} catch (Exception $e) {
+}
+
+function getUserinfo(array $user): string
+{
+    if (empty($user)) {
+        return '';
+    }
+//    作業中　表示される名前どうなってるか確認
+    return ""
+
+}
 
 
 ?>
