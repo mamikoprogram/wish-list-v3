@@ -32,7 +32,10 @@ function getUserById(PDO $dbh, ?int $id): array
     }
     //ユーザー登録の情報の呼び出し
     $sql = "SELECT * FROM users WHERE id = :ID";
-    $stmt = select($dbh, $sql, [':ID' => $id,]);
+    try {
+        $stmt = select($dbh, $sql, [':ID' => $id,]);
+    } catch (Exception) {
+    }
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     return (empty($user) ? [] : $user);

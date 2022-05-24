@@ -9,7 +9,6 @@ function db(): PDO
 }
 
 //作業中 この関数の使い方はもう少し理解を深める必要あり
-
 function select(PDO $dbh, string $sql, array $binds = []): PDOStatement
 {
     $stmt = $dbh->prepare($sql);

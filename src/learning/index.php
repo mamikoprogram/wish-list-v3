@@ -1,24 +1,27 @@
 <?php
 
+use JetBrains\PhpStorm\Pure;
+
 require_once "../include/initialize.php";
 $user = [];
 
 try {
-    $db = db();
+    $dbh = db();
     $user = getUserById($dbh, $_SESSION['id'] ?? null);
 } catch (Exception $e) {
 }
 
-function getUserinfo(array $user): string
+#[Pure] function getUserinfo(array $user): string
 {
     if (empty($user)) {
         return '';
     }
-//    作業中　表示される名前どうなってるか確認
-    return ""
-
+//    要確認　表示される名前
+    return h(
+        "{$user['name']}【{$user['email
+    ']}】さん"
+    );
 }
-
 
 ?>
 
@@ -35,11 +38,6 @@ function getUserinfo(array $user): string
 <body>
 <h1>Wish List</h1>
 <p>こんにちは<?php
-    if (!empty($name)):
-//        hはXSS対策
-        echo h($name);
-    else:
-        echo h($email);
-    endif; ?>さん</p>
+    echo getUserInfo($user); ?></p>
 </body>
 </html>

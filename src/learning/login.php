@@ -2,7 +2,6 @@
 
 require_once "../include/initialize.php";
 
-//作業中
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
 
@@ -16,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('location:http://localhost:8080/index.php');
                 exit;
             }
-            $errors[] = 'ログインできませんでした。';
-        } catch (Exception$exception) {
+            $errors[] = "ログインできませんでした。";
+        } catch (Exception $exception) {
             $errors[] = "ログインできませんでした。";
         }
     }
@@ -28,7 +27,7 @@ function validate(): array
     $errors = [];
 
     if ($_SESSION['token'] !== $_POST['token']) {
-        $errors[] = 'トークンが正しくありません。';
+        $errors[] = 'トークンが不適切です。';
     }
 
     //メールとパスワードが空かチェック
@@ -43,32 +42,7 @@ function validate(): array
     return $errors;
 }
 
-//if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//    $email = $_POST['email'];
-//    $password = makeSecurePassword($_POST['password']);
-//
-//
-//    //パスワードの文字数チェック（６文字以上１２文字以内）
-//    $pw = mb_strlen($_POST['password']);
-//    if ($pw < 6 || $pw > 12) {
-//        $errors[] = 'メールアドレスかパスワードが正しくありません';
-//    }
-//
-//    if ($errors === '') {
-//        try {
-//            // データベース接続
-//            $dbh = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
-//            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//            $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-//            //ユーザー登録の情報を呼び出す
-//            $sql = "SELECT * FROM users WHERE email = :EMAIL and password = :PASSWORD";
-//            $stmt = $dbh->prepare($sql);
-//            $stmt->bindParam(':EMAIL', $email);
-//            $stmt->bindParam(':PASSWORD', $password);
-//            $stmt->execute();
-//            $user = $stmt->fetch();
-//            var_dump($user);
-//
+
 //            //条件が一致したらログイン
 //            if ($_SESSION['token'] === $_POST['token']) {
 //                if ($user['email'] === $email && $user['password'] === $password) {
