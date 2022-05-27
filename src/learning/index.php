@@ -1,25 +1,23 @@
 <?php
 
-use JetBrains\PhpStorm\Pure;
 
 require_once "../include/initialize.php";
 $user = [];
 
 try {
-    $dbh = db();
-    $user = getUserById($dbh, $_SESSION['id'] ?? null);
+    $db = db();
+    $user = getUserById($db, $_SESSION['id'] ?? null);
 } catch (Exception $e) {
 }
 
-#[Pure] function getUserinfo(array $user): string
+function getUserInfo(array $user): string
 {
     if (empty($user)) {
         return '';
     }
 //    要確認　表示される名前
     return h(
-        "{$user['name']}【{$user['email
-    ']}】さん"
+        "{$user['name']}【{$user['email']}】さん"
     );
 }
 

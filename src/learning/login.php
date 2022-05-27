@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
-            $dbh = db();
+            $db = db();
 //            ユーザー認証
-            $user = getUserByAuth($dbh, $_POST['email'], $_POST['password']);
+            $user = getUserByAuth($db, $_POST['email'], $_POST['password']);
             if (!empty($user)) {
                 $_SESSION['id'] = $user['id'];
                 header('location:http://localhost:8080/index.php');
@@ -42,23 +42,6 @@ function validate(): array
     return $errors;
 }
 
-
-//            //条件が一致したらログイン
-//            if ($_SESSION['token'] === $_POST['token']) {
-//                if ($user['email'] === $email && $user['password'] === $password) {
-//                    $_SESSION['email'] = $user['email'];
-//                    $_SESSION['name'] = $user['name'];
-//                    header('location: http://localhost:8080/index.php');
-//                } else {
-//                    echo "ログインできませんでした。";
-//                }
-//            }
-//        } catch (PDOException $error) {
-//            echo "ユーザー登録してください。";
-//            exit;
-//        }
-//    }
-//}
 
 ?>
 <!doctype html>

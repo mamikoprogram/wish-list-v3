@@ -40,14 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // データベース接続
-            $dbh = db();
+            $db = db();
         } catch
         (PDOException $error) {
             echo 'DB接続エラー';
             exit;
         }
         $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
-        $stmt = $dbh->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->bindParam(':NAME', $name);
         $stmt->bindParam(':EMAIL', $email);
         $stmt->bindParam(':PASSWORD', $password);

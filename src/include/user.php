@@ -1,19 +1,18 @@
 <?php
 
-
 /**
- * @param PDO $dbh
+ * @param PDO $db
  * @param string $email
  * @param string $password
  * @return bool|array
  * @throws Exception
  */
 
-function getUserByAuth(PDO $dbh, string $email, string $password): bool|array
+function getUserByAuth(PDO $db, string $email, string $password): bool|array
 {
 //ユーザー登録の情報の呼び出し
     $sql = "SELECT * FROM users WHERE email = :EMAIL";
-    $stmt = select($dbh, $sql, [':EMAIL' => $email,]);
+    $stmt = select($db, $sql, [':EMAIL' => $email,]);
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if (false === $user) {
@@ -25,7 +24,7 @@ function getUserByAuth(PDO $dbh, string $email, string $password): bool|array
     return $user;
 }
 
-function getUserById(PDO $dbh, ?int $id): array
+function getUserById(PDO $db, ?int $id): array
 {
     if (empty($id)) {
         return [];
@@ -33,7 +32,7 @@ function getUserById(PDO $dbh, ?int $id): array
     //ユーザー登録の情報の呼び出し
     $sql = "SELECT * FROM users WHERE id = :ID";
     try {
-        $stmt = select($dbh, $sql, [':ID' => $id,]);
+        $stmt = select($db, $sql, [':ID' => $id,]);
     } catch (Exception) {
     }
 
