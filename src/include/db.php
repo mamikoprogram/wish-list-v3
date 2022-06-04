@@ -26,7 +26,6 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
 }
 
 //作業中（混乱中）
-
 function insert(PDO $db,)
 {
 //    $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
