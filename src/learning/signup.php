@@ -6,55 +6,80 @@ require_once "../include/initialize.php";
 $name = '';
 $email = '';
 $password = '';
-$errorList = array();
+$errors = array();
 
+function validate(): array
+{
+    $errors = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//メールとパスワードが空かチェック
+    //メールとパスワードが空かチェック
     if (empty($_POST['email']) || empty($_POST['password'])) {
-        $errorList['blank'] = 'メールアドレスとパスワードを入力してください';
+        $errors[] = 'メールアドレスとパスワードを入力してください';
     }
 
-//メールとパスワードが空白かチェック
+    //メールとパスワードが空白かチェック
     if ($_POST['email'] === '' || $_POST['password'] === '') {
-        $errorList['blank'] = 'メールアドレスとパスワードを入力してください';
+        $errors[] = 'メールアドレスとパスワードを入力してください';
     }
 
-//メールの形式になっているかチェック
+    //メールの形式になっているかチェック
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
     if ($email === '') {
-        $errorList['mail'] = 'メールアドレスを正しく入力してください';
+        $errors[] = 'メールアドレスを正しく入力してください';
     }
 
-//パスワードの文字数チェック（６文字以上１２文字以内）
+    //パスワードの文字数チェック（６文字以上１２文字以内）
     $pw = mb_strlen($_POST['password']);
     if ($pw < 6 || $pw > 12) {
-        $errorList['pass'] = 'パスワードは６文字以上１２文字以内で入力してください';
+        $errors[] = 'パスワードは６文字以上１２文字以内で入力してください';
     }
+    return $errors;
+}
+
+//作業中
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $errors = validate();
 
 //チェックがOKならユーザー登録する
-    if (empty($errorList)) {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $password = makeSecurePassword($_POST['password']);
-
+    if (empty($erroes)) {
+//        $name = $_POST['name'];
+//        $email = $_POST['email'];
+//        $password = makeSecurePassword($_POST['password']);
         try {
-            // データベース接続
             $db = db();
         } catch
         (PDOException $error) {
             echo 'DB接続エラー';
             exit;
         }
-        $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':NAME', $name);
-        $stmt->bindParam(':EMAIL', $email);
-        $stmt->bindParam(':PASSWORD', $password);
-        $stmt->execute();
-        header('location: http://localhost:8080/login.php');
+//        関数化したインサート分呼び出し
     }
 }
+
+
+////チェックがOKならユーザー登録する
+//    if (empty($errorList)) {
+//        $name = $_POST['name'];
+//        $email = $_POST['email'];
+//        $password = makeSecurePassword($_POST['password']);
+//
+//        try {
+//            // データベース接続
+//            $db = db();
+//        } catch
+//        (PDOException $error) {
+//            echo 'DB接続エラー';
+//            exit;
+//        }
+//        $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
+//        $stmt = $db->prepare($sql);
+//        $stmt->bindParam(':NAME', $name);
+//        $stmt->bindParam(':EMAIL', $email);
+//        $stmt->bindParam(':PASSWORD', $password);
+//        $stmt->execute();
+//        header('location: http://localhost:8080/login.php');
+//    }
+//}
 ?>
 
 <!doctype html>

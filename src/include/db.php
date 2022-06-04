@@ -9,7 +9,6 @@ function db(): PDO
     return $db;
 }
 
-//作業中 この関数の使い方はもう少し理解を深める必要あり
 /**
  * @throws Exception
  */
@@ -24,4 +23,16 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
     }
     $stmt->execute();
     return $stmt;
+}
+
+//作業中（混乱中）
+
+function insert(PDO $db,)
+{
+//    $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
+//    $stmt = $db->prepare($sql);
+//    $stmt->bindParam(':NAME', $name);
+//    $stmt->bindParam(':EMAIL', $email);
+//    $stmt->bindParam(':PASSWORD', $password);
+//    $stmt->execute();
 }
