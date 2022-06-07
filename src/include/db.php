@@ -1,6 +1,5 @@
 <?php
 
-
 function db(): PDO
 {
     $db = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
@@ -26,12 +25,12 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
 }
 
 //作業中（混乱中）
-function insert(PDO $db,)
+function insert(PDO $db, string $name, string $email, string $password)
 {
-//    $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
-//    $stmt = $db->prepare($sql);
-//    $stmt->bindParam(':NAME', $name);
-//    $stmt->bindParam(':EMAIL', $email);
-//    $stmt->bindParam(':PASSWORD', $password);
-//    $stmt->execute();
+    $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
+    $stmt = $db->prepare($sql);
+
+    $ = select($db,[':NAME' => $name, ':EMAIL' => $email, ':PASSWORD' => $password]);
+
+    $stmt->execute();
 }

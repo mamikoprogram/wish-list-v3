@@ -8,6 +8,47 @@ $email = '';
 $password = '';
 $errors = array();
 
+//作業中
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $errors = validate();
+
+    if (empty($erroes)) {
+//        $name = $_POST['name'];
+//        $email = $_POST['email'];
+//        $password = makeSecurePassword($_POST['password']);
+        try {
+            $db = db();
+        } catch
+        (PDOException $error) {
+            echo 'DB接続エラー';
+            exit;
+        }
+    }
+}
+
+//    if (empty($errorList)) {
+//        $name = $_POST['name'];
+//        $email = $_POST['email'];
+//        $password = makeSecurePassword($_POST['password']);
+//
+//        try {
+//            // データベース接続
+//            $db = db();
+//        } catch
+//        (PDOException $error) {
+//            echo 'DB接続エラー';
+//            exit;
+//        }
+//        $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
+//        $stmt = $db->prepare($sql);
+//        $stmt->bindParam(':NAME', $name);
+//        $stmt->bindParam(':EMAIL', $email);
+//        $stmt->bindParam(':PASSWORD', $password);
+//        $stmt->execute();
+//        header('location: http://localhost:8080/login.php');
+//    }
+//}
+
 function validate(): array
 {
     $errors = [];
@@ -36,48 +77,6 @@ function validate(): array
     return $errors;
 }
 
-//作業中
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = validate();
-
-//チェックがOKならユーザー登録する
-    if (empty($erroes)) {
-//        $name = $_POST['name'];
-//        $email = $_POST['email'];
-//        $password = makeSecurePassword($_POST['password']);
-        try {
-            $db = db();
-        } catch
-        (PDOException $error) {
-            echo 'DB接続エラー';
-            exit;
-        }
-//        関数化したインサート分呼び出し
-    }
-}
-
-//    if (empty($errorList)) {
-//        $name = $_POST['name'];
-//        $email = $_POST['email'];
-//        $password = makeSecurePassword($_POST['password']);
-//
-//        try {
-//            // データベース接続
-//            $db = db();
-//        } catch
-//        (PDOException $error) {
-//            echo 'DB接続エラー';
-//            exit;
-//        }
-//        $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
-//        $stmt = $db->prepare($sql);
-//        $stmt->bindParam(':NAME', $name);
-//        $stmt->bindParam(':EMAIL', $email);
-//        $stmt->bindParam(':PASSWORD', $password);
-//        $stmt->execute();
-//        header('location: http://localhost:8080/login.php');
-//    }
-//}
 ?>
 
 <!doctype html>
