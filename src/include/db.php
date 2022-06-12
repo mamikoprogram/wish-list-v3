@@ -18,19 +18,66 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
         throw new Exception('sql error');
     }
     foreach ($binds as $key => $value) {
-        $stmt->bindParam($key, $value);
+        $stmt->bindValue($key, $value);
     }
     $stmt->execute();
     return $stmt;
 }
 
-//作業中（混乱中）
-function insert(PDO $db, string $name, string $email, string $password)
+/**
+ * @param PDO $db
+ * @param string $table
+ * @param array $cols
+ * @return bool
+ */
+function insert(PDO $db, string $table, array $cols): bool
 {
-    $sql = 'INSERT INTO users(name,email,password) VALUES(:NAME,:EMAIL,:PASSWORD)';
+    /*
+    $cols = [
+        'name' => $name,
+        'email' => $email,
+        'password' => $password,
+    ];
+    */
+
+    $values = [];
+    foreach ($cols as $key => $value) {
+        $values[] = ":{$key}";
+    }
+    /*
+    $values = [
+        :name,
+        :email,
+        :password,
+    ];
+    */
+
+    $insertCols = implode(',', array_keys($cols));
+    $insertValues = implode(',', $values);
+    /*
+     * $insertCols = name, email, password
+     * $insertValues = :name, :email, :password
+     */
+
+    $sql = "INSERT INTO {$table} ({$insertCols}) values ({$insertValues})";
+    /*
+     * insert into users (name, email, password) values ('name', 'email', 'password');
+     * insert into users (name, email, password) values (:name, :name, :password);
+     */
+
+//    print_r([
+//        $keys,
+//        $values,
+//        $insertCols,
+//        $insertValues,
+//        $sql
+//    ]);
+//    die;
+
     $stmt = $db->prepare($sql);
+    foreach ($cols as $key => $value) {
+        $stmt->bindValue(':' . $key, $value);
+    }
 
-    $ = select($db,[':NAME' => $name, ':EMAIL' => $email, ':PASSWORD' => $password]);
-
-    $stmt->execute();
+    return $stmt->execute();
 }

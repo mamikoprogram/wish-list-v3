@@ -41,12 +41,3 @@ function getUserById(PDO $db, ?int $id): array
 //    $userが空なら配列を初期化する　該当なければ$user
 //    を返す
 }
-
-function getAllUser(PDO $db, bool $onlyEnabled = true) {
-    //ユーザー登録の情報の呼び出し
-    $sql = "SELECT * FROM users";
-    try {
-        $stmt = select($db, $sql);
-    } catch (Exception) {
-    }
-}

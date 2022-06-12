@@ -1,7 +1,7 @@
 <?php
 
 //XSS対策
-function h($str)
+function h($str): string
 {
     return htmlspecialchars($str, ENT_QUOTES, "UTF-8");
 }
