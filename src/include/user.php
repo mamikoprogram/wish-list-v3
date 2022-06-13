@@ -41,3 +41,25 @@ function getUserById(PDO $db, ?int $id): array
 //    $userが空なら配列を初期化する　該当なければ$user
 //    を返す
 }
+
+//作業中
+function insertUser($db, $_POST['name'], $_POST['email'], $_POST['password']) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = makeSecurePassword($_POST['password']);
+
+    $stmt = getUserByAuth($email);
+    if ($stmt === false) {
+        $db = db();
+        $cols = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+        ];
+        $stmt = insert($db, 'users', $cols);
+        return $stmt;
+    }
+//    POSTの値を代入して
+//    DB接続
+//    insert関数使って登録
+}
