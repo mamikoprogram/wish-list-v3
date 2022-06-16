@@ -7,13 +7,13 @@ $email = '';
 $password = '';
 $errors = array();
 
-//作業中
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
-
     if (empty($erroes)) {
-//        関数呼び出し
-        if ($stmt === false) {
+        $db = db();
+
+        $insert = insertUser($db, $_POST['name'], $_POST['email'], makeSecurePassword($_POST['password']));
+        if ($insert === false) {
             return;
         }
         header('location: http://localhost:8080/login.php');
