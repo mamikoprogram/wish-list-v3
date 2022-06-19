@@ -15,7 +15,6 @@ function getUserInfo(array $user): string
     if (empty($user)) {
         return '';
     }
-//    要確認　表示される名前
     return h(
         "{$user['name']}【{$user['email']}】さん"
     );

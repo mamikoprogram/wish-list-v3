@@ -9,25 +9,20 @@ $errors = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
-    if (empty($erroes)) {
+    if ($errors === []) {
         $db = db();
-
         $insert = insertUser($db, $_POST['name'], $_POST['email'], makeSecurePassword($_POST['password']));
         if ($insert === false) {
             return;
         }
         header('location: http://localhost:8080/login.php');
     }
+    echo implode(",", $errors);
 }
 
 function validate(): array
 {
     $errors = [];
-
-    //メールとパスワードが空かチェック
-    if (empty($_POST['email']) || empty($_POST['password'])) {
-        $errors[] = 'メールアドレスとパスワードを入力してください';
-    }
 
     //メールとパスワードが空白かチェック
     if ($_POST['email'] === '' || $_POST['password'] === '') {

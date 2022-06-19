@@ -50,6 +50,5 @@ function insertUser($db, $name, $email, $password): bool
         'email' => $email,
         'password' => $password,
     ];
-    $stmt = insert($db, 'users', $cols);
-    return $stmt;
+    return insert($db, 'users', $cols);
 }
