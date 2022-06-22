@@ -9,13 +9,14 @@ $errors = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
-    if ($errors === []) {
+    if (empty($errors)) {
         $db = db();
         $insert = insertUser($db, $_POST['name'], $_POST['email'], makeSecurePassword($_POST['password']));
         if ($insert === false) {
             return;
         }
         header('location: http://localhost:8080/login.php');
+        exit;
     }
     echo implode(",", $errors);
 }

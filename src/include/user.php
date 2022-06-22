@@ -42,9 +42,8 @@ function getUserById(PDO $db, ?int $id): array
 //    を返す
 }
 
-function insertUser($db, $name, $email, $password): bool
+function insertUser(PDO $db, ?string $name, string $email, string $password): bool
 {
-    db();
     $cols = [
         'name' => $name,
         'email' => $email,
