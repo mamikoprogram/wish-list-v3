@@ -1,5 +1,81 @@
 body {
     margin: 0;
     text-align: center;
+    user-select: none;
     font-family: sans-serif;
 }
+
+.item {
+    margin-top: 16px;
+    display: block;
+}
+
+form input[type="text"] {
+    width: 300px;
+    height: 32px;
+    border-radius: 1mm;
+}
+
+textarea {
+    width: 300px;
+    resize: none;
+    border-radius: 1mm;
+    padding-top: 6px;
+}
+
+textarea::placeholder {
+    font-size: 13px;
+    color: rgb(173, 172, 172);
+}
+
+table {
+    margin: 24px auto;
+}
+
+table td {
+    text-align: left;
+    padding: 4px 32px;
+    border-bottom: 1px dashed burlywood;
+    max-width: 40%;
+}
+
+thead {
+    background: burlywood;
+}
+
+tbody a {
+    text-decoration: none;
+    color: #333333;
+}
+
+tbody a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.btn-style {
+    border-radius: 1mm;
+    color: #333;
+    text-align: center;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    padding: 4px 12px;
+    margin: 16px auto;
+    display: inline-block;
+    text-decoration: none;
+    border: 1px;
+    background: #dcd9d9;
+}
+
+.btn-style:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+p.detail {
+    max-width: 60%;
+    text-align: center;
+    display: inline-block;
+}
+
+
+

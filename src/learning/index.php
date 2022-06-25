@@ -1,6 +1,5 @@
 <?php
 
-
 require_once "../include/initialize.php";
 $user = [];
 
@@ -36,5 +35,15 @@ function getUserInfo(array $user): string
 <h1>Wish List</h1>
 <p>こんにちは<?php
     echo getUserInfo($user); ?></p>
+<a href="new-wish.php" class="btn-style">Wishを追加する</a>
+<table>
+    <thead>
+    <tr>
+        <th>My Wish</th>
+        <th>Memo</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
 </body>
 </html>
