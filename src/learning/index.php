@@ -1,3 +1,27 @@
+<?php
+
+
+require_once "../include/initialize.php";
+$user = [];
+
+try {
+    $db = db();
+    $user = getUserById($db, $_SESSION['id'] ?? null);
+} catch (Exception $e) {
+}
+
+function getUserInfo(array $user): string
+{
+    if (empty($user)) {
+        return '';
+    }
+    return h(
+        "{$user['name']}【{$user['email']}】さん"
+    );
+}
+
+?>
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -5,32 +29,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PHP版 本気の Docker サンプル</title>
+    <title>Wish List</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>PHP版 本気の Docker サンプル</h1>
-<h2>DB接続確認</h2>
-<?php
-$db = new PDO(
-    'mysql:dbname=' . getenv('MYSQL_DATABASE') . ';host=' . getenv('MYSQL_HOST'),
-    getenv('MYSQL_USER'),
-    getenv('MYSQL_PASSWORD')
-);
-$row = $db->query("select now()")->fetch();
-echo $row[0];
-?>
-<h2>DB接続サンプル</h2>
-<pre
-    style="background-color: lightgray; border: 1px solid black; padding: 10px;">
-$db = new PDO(
-    'mysql:dbname=' . getenv('MYSQL_DATABASE') . ';host=' . getenv('MYSQL_HOST'),
-    getenv('MYSQL_USER'),
-    getenv('MYSQL_PASSWORD')
-);
-$row = $db->query("select now()")->fetch();
-echo $row[0];
-</pre>
-
-
+<h1>Wish List</h1>
+<p>こんにちは<?php
+    echo getUserInfo($user); ?></p>
 </body>
 </html>
