@@ -10,7 +10,7 @@ body {
     display: block;
 }
 
-form input[type="text"] {
+.txt {
     width: 300px;
     height: 32px;
     border-radius: 1mm;
@@ -76,6 +76,3 @@ p.detail {
     text-align: center;
     display: inline-block;
 }
-
-
-

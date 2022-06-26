@@ -2,19 +2,19 @@
 
 require_once "../include/initialize.php";
 
-
 $errors = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
 
     if (empty($errors)) {
-//        作業中
-//        ユーザーidを変数に代入
-//        変数ユーザーidを引数に渡す
-        $userId =
+        $userId = $_SESSION['id'];
         $db = db();
-        return insertWish($db, $_POST['myWish'], $_POST['memo'], $userId);
+        $wish = insertWish($db, $_POST['myWish'], $_POST['memo'], $userId);
+        if (!empty($wish)) {
+            header('location:http://localhost:8080/index.php');
+            exit;
+        }
     }
     echo implode(",", $errors);
 }
@@ -23,41 +23,19 @@ function validate(): array
 {
     $errors = [];
 
-//    if ($_SESSION['token'] !== $_POST['token']) {
-//        $errors[] = 'トークンが不適切です。';
-//    }
-
     //空かチェック
     if (empty($_POST['myWish'])) {
         $errors[] = 'Wishを登録してください。';
     }
 
     //空白かチェック
-    if ($_POST['myWish'] === 'Wishを登録してください') {
-        $errors[] = '';
+    if ($_POST['myWish'] === '') {
+        $errors[] = 'Wishを登録してください';
     }
     return $errors;
 }
 
-/**
- * @param PDO $db
- * @param string $myWish
- * @param string $memo
- * @param int $userId
- * @return bool
- */
-function insertWish(PDO $db, string $myWish, string $memo, int $userId): bool
-{
-    $cols = [
-        'my_wish' => $myWish,
-        'memo' => $memo,
-        'user_id' => $userId,
-    ];
-    return insert($db, 'wishes', $cols);
-}
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -73,11 +51,11 @@ function insertWish(PDO $db, string $myWish, string $memo, int $userId): bool
 <form method="POST" action="new-wish.php">
     <span class="item">My Wish:</span><br>
     <label>
-        <input type="text" class="txt" name="myWish" placeholder="例）旅行に行く">
+        <input type="text" class="txt" name="myWish" placeholder="例）旅行に行く" "maxlength="255">
     </label>
     <span class="item">Memo:</span><br>
     <label for="memo"></label><textarea name="memo" id="memo" cols="20" rows="10"
-                                        placeholder="例）夏までに貯金して沖縄でリゾートホテルに泊まる "></textarea>
+                                        placeholder="例）夏までに貯金して沖縄でリゾートホテルに泊まる" maxlength="255"></textarea>
     <br>
     <input class="btn-style" type="submit" value="Wishを追加">
 </form>
