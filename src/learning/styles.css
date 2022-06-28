@@ -4,6 +4,9 @@ body {
     user-select: none;
     font-family: sans-serif;
 }
+.errormessage {
+    color: red;
+}
 
 .item {
     margin-top: 16px;

@@ -34,11 +34,9 @@ function validate(): array
     if (empty($_POST['email']) || empty($_POST['password'])) {
         $errors[] = 'メールアドレスかパスワードが正しくありません';
     }
-
+    // todo  空白チェック
     //メールとパスワードが空白かチェック
-    if ($_POST['email'] === '' || $_POST['password'] === '') {
-        $errors[] = 'メールアドレスかパスワードが正しくありません';
-    }
+
     return $errors;
 }
 
@@ -57,13 +55,15 @@ function validate(): array
 <body>
 <h1>Wish List</h1>
 <h2>ログイン</h2>
+<span class="errormessage">
 <?php
 if (!empty($errors)):
     foreach ($errors as $error) {
         echo $error;
+        echo "<br>";
     }
 endif; ?>
-
+</span>
 <form action="" method="POST">
     <label for="mail">メールアドレス</label><br>
     <input type="email" name="email" id="mail"><br>

@@ -6,32 +6,27 @@ $errors = array();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
-
     if (empty($errors)) {
         $userId = $_SESSION['id'];
         $db = db();
+        // todo insertの戻り値を適切に修正する（詳細ページ作成時）
         $wish = insertWish($db, $_POST['myWish'], $_POST['memo'], $userId);
         if (!empty($wish)) {
             header('location:http://localhost:8080/index.php');
             exit;
         }
     }
-    echo implode(",", $errors);
 }
 
 function validate(): array
 {
     $errors = [];
 
-    //空かチェック
+    // 空かチェック
     if (empty($_POST['myWish'])) {
         $errors[] = 'Wishを登録してください。';
     }
-
-    //空白かチェック
-    if ($_POST['myWish'] === '') {
-        $errors[] = 'Wishを登録してください';
-    }
+    // todo 空白チェック
     return $errors;
 }
 
@@ -48,6 +43,13 @@ function validate(): array
 </head>
 <body>
 <h1>New Wish</h1>
+<span class="errormessage"><?php
+    if (!empty($errors)):
+        foreach ($errors as $error) {
+            echo $error;
+            echo "<br>";
+        }
+    endif; ?></span>
 <form method="POST" action="new-wish.php">
     <span class="item">My Wish:</span><br>
     <label>
