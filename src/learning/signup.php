@@ -25,7 +25,7 @@ function validate(): array
     $errors = [];
 
     //メールとパスワードが空白かチェック
-    if ($_POST['email'] === '' || $_POST['password'] === '') {
+    if (trim($_POST['email']) === '' || trim($_POST['password']) === '') {
         $errors[] = 'メールアドレスとパスワードを入力してください';
     }
 

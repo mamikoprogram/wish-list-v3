@@ -23,10 +23,9 @@ function validate(): array
     $errors = [];
 
     // 空かチェック
-    if (empty($_POST['myWish'])) {
+    if (empty(trim($_POST['myWish']))) {
         $errors[] = 'Wishを登録してください。';
     }
-    // todo 空白チェック
     return $errors;
 }
 

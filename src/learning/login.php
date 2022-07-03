@@ -34,12 +34,9 @@ function validate(): array
     if (empty($_POST['email']) || empty($_POST['password'])) {
         $errors[] = 'メールアドレスかパスワードが正しくありません';
     }
-    // todo  空白チェック
-    //メールとパスワードが空白かチェック
 
     return $errors;
 }
-
 
 ?>
 <!doctype html>
