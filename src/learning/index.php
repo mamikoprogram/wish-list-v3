@@ -9,6 +9,8 @@ try {
 } catch (Exception $e) {
 }
 
+$wishes = display($db);
+
 function getUserInfo(array $user): string
 {
     if (empty($user)) {
@@ -45,5 +47,16 @@ function getUserInfo(array $user): string
         <th></th>
     </tr>
     </thead>
+    <tbody>
+    <?php
+    foreach ($wishes as $wish): ?>
+        <tr>
+            <td><?php
+                echo mb_substr($wish['subject'], 0, 10); ?></td>
+            <td><?php
+                echo mb_substr($wish['memo'], 0, 10); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
 </body>
 </html>
