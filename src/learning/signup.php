@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('location: http://localhost:8080/login.php');
         exit;
     }
-    echo implode(",", $errors);
 }
 
 function validate(): array
@@ -26,7 +25,7 @@ function validate(): array
     $errors = [];
 
     //メールとパスワードが空白かチェック
-    if ($_POST['email'] === '' || $_POST['password'] === '') {
+    if (trim($_POST['email']) === '' || trim($_POST['password']) === '') {
         $errors[] = 'メールアドレスとパスワードを入力してください';
     }
 
@@ -59,17 +58,15 @@ function validate(): array
 <body>
 <h1>Wish List</h1>
 <h2>ユーザー登録</h2>
-<?php
-if (!empty($errorList)): ?>
+<span class="errormessage">
     <?php
-    foreach ($errorList as $error): ?>
-        <?php
-        echo $error; ?>
-        <br>
-    <?php
-    endforeach; ?>
-<?php
-endif; ?>
+    if (!empty($errors)):
+        foreach ($errors as $error):
+            echo $error;
+            echo "<br>";
+        endforeach;;
+    endif; ?>
+</span>
 <form action="" method="POST">
     <label for="name">ニックネーム</label><br>
     <input type="text" name="name" id="name"><br>

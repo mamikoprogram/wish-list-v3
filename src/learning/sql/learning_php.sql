@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: db
--- 生成日時: 2022 年 6 月 19 日 14:08
+-- 生成日時: 2022 年 7 月 07 日 03:04
 -- サーバのバージョン： 5.7.36
 -- PHP のバージョン: 8.0.15
 
@@ -43,7 +43,29 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
                                                             (8, 'テスト２', 'test2@gmail.com', '1615ed643efd9ea299c743862acfe539d1abff99'),
                                                             (9, '<script>!</script>', 'test3@gmail.com', 'c049ec1535d081feff99ac17fe615d7ccb3af6ae'),
                                                             (10, '', 'test4@gmail.com', '7c3560609137ce99793216c76c68840aa49a34ae'),
-                                                            (60, 'テスト５', 'test5@gmail.com', '839640a95d19a754224e168eec905a40b1c26953');
+                                                            (69, 'テスト８', 'test8@gmail.com', '4b1c46f16ecc2e2194a28ae984820fe39ec5c4c6');
+
+-- --------------------------------------------------------
+
+--
+-- テーブルの構造 `wishes`
+--
+
+CREATE TABLE `wishes` (
+                          `id` int(10) NOT NULL,
+                          `subject` varchar(255) DEFAULT NULL,
+                          `memo` text,
+                          `completion` tinyint(1) NOT NULL DEFAULT '0',
+                          `user_id` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- テーブルのデータのダンプ `wishes`
+--
+
+INSERT INTO `wishes` (`id`, `subject`, `memo`, `completion`, `user_id`) VALUES
+                                                                            (12, '旅行に行く', 'ゆっくり温泉に入りた〜〜い', 0, 69),
+                                                                            (16, '長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish', '長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテ', 0, 69);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -56,6 +78,12 @@ ALTER TABLE `users`
     ADD PRIMARY KEY (`id`);
 
 --
+-- テーブルのインデックス `wishes`
+--
+ALTER TABLE `wishes`
+    ADD PRIMARY KEY (`id`);
+
+--
 -- ダンプしたテーブルの AUTO_INCREMENT
 --
 
@@ -63,7 +91,13 @@ ALTER TABLE `users`
 -- テーブルの AUTO_INCREMENT `users`
 --
 ALTER TABLE `users`
-    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
+-- テーブルの AUTO_INCREMENT `wishes`
+--
+ALTER TABLE `wishes`
+    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

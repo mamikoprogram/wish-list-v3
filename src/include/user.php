@@ -38,8 +38,6 @@ function getUserById(PDO $db, ?int $id): array
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     return (empty($user) ? [] : $user);
-//    $userが空なら配列を初期化する　該当なければ$user
-//    を返す
 }
 
 function insertUser(PDO $db, ?string $name, string $email, string $password): bool
