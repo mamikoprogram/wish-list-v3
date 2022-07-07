@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: db
--- 生成日時: 2022 年 7 月 03 日 0:19
+-- 生成日時: 2022 年 7 月 07 日 03:04
 -- サーバのバージョン： 5.7.36
 -- PHP のバージョン: 8.0.15
 
@@ -55,7 +55,7 @@ CREATE TABLE `wishes` (
                           `id` int(10) NOT NULL,
                           `subject` varchar(255) DEFAULT NULL,
                           `memo` text,
-                          `completion` int(1) DEFAULT '0',
+                          `completion` tinyint(1) NOT NULL DEFAULT '0',
                           `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -64,9 +64,8 @@ CREATE TABLE `wishes` (
 --
 
 INSERT INTO `wishes` (`id`, `subject`, `memo`, `completion`, `user_id`) VALUES
-                                                                            (9, 'テスト１', 'user_id 確認', 0, 7),
-                                                                            (10, 'テスト３', 'user_id　確認', 0, 9),
-                                                                            (11, 'テスト５', '長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト', 0, 66);
+                                                                            (12, '旅行に行く', 'ゆっくり温泉に入りた〜〜い', 0, 69),
+                                                                            (16, '長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish', '長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテ', 0, 69);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -98,7 +97,7 @@ ALTER TABLE `users`
 -- テーブルの AUTO_INCREMENT `wishes`
 --
 ALTER TABLE `wishes`
-    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
