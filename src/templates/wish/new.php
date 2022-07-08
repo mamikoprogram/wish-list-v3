@@ -9,7 +9,7 @@ element('header', [
     'title' => 'New Wish'
 ]); ?>
 <?php
-element('error', $errors) ?>
+element('error', ['errors' => $errors]) ?>
 <form method="POST" action="new-wish.php">
     <span class="item">My Wish:</span><br>
     <label>
