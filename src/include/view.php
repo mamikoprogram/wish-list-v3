@@ -11,5 +11,5 @@ function element(string $element, array $vars = []): void
 {
     extract($vars, EXTR_OVERWRITE);
     /** @noinspection PhpIncludeInspection */
-    require dirname(__FILE__) . "/../templates/elements/{$element}.php";
+    include dirname(__FILE__) . "/../templates/elements/{$element}.php";
 }
