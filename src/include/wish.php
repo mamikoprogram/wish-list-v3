@@ -11,7 +11,7 @@ function insertWish(PDO $db, string $subject, string $memo, int $userId): bool
     ];
     return insert($db, 'wishes', $cols);
 }
-function display(PDO $db): array
+function findWishByList(PDO $db): array
 {
     $sql = 'select * from wishes';
     $stmt = $db->query($sql);

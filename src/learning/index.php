@@ -9,7 +9,7 @@ try {
 } catch (Exception $e) {
 }
 
-$wishes = display($db);
+$wishes = findWishByList($db);
 
 function getUserInfo(array $user): string
 {
@@ -56,7 +56,9 @@ function getUserInfo(array $user): string
             <td><?php
                 echo mb_substr($wish['memo'], 0, 10); ?></td>
         </tr>
-        <?php endforeach; ?>
+    <?php
+    endforeach; ?>
     </tbody>
+</table>
 </body>
 </html>
