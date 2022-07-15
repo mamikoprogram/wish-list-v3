@@ -3,13 +3,13 @@
 require_once "../include/initialize.php";
 $user = [];
 
-try {
+if (isset($_SESSION['id'])) {
     $db = db();
     $user = getUserById($db, $_SESSION['id'] ?? null);
-} catch (Exception $e) {
+    $wishes = findWishByList($db);
+} else {
+    header('location:http://localhost:8080/login.php');
 }
-
-$wishes = findWishByList($db);
 
 function getUserInfo(array $user): string
 {
@@ -20,7 +20,6 @@ function getUserInfo(array $user): string
         "{$user['name']}【{$user['email']}】さん"
     );
 }
-
 ?>
 
 <!doctype html>
