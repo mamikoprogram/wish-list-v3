@@ -3,13 +3,15 @@
 require_once "../include/initialize.php";
 $user = [];
 
-if (isset($_SESSION['id'])) {
-    $db = db();
-    $user = getUserById($db, $_SESSION['id'] ?? null);
-    $wishes = findWishByList($db);
-} else {
+$db = db();
+$user = getUserById($db, $_SESSION['id'] ?? null);
+
+if (empty($user)) {
     header('location:http://localhost:8080/login.php');
+    exit;
 }
+
+$wishes = findWishByList($db);
 
 function getUserInfo(array $user): string
 {
@@ -51,9 +53,9 @@ function getUserInfo(array $user): string
     foreach ($wishes as $wish): ?>
         <tr>
             <td><?php
-                echo mb_substr($wish['subject'], 0, 10); ?></td>
+                echo mb_substr(h($wish['subject']), 0, 10); ?></td>
             <td><?php
-                echo mb_substr($wish['memo'], 0, 10); ?></td>
+                echo mb_substr(h($wish['memo']), 0, 10); ?></td>
         </tr>
     <?php
     endforeach; ?>
