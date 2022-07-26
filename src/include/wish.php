@@ -12,10 +12,15 @@ function insertWish(PDO $db, string $subject, string $memo, int $userId): bool
     return insert($db, 'wishes', $cols);
 }
 
-// todo 一覧表示はユーザー毎に行う（作業中）
-function findWishByList(PDO $db): array
+/**
+ * @param PDO $db
+ * @param int $id
+ * @return array
+ */
+function findWishByList(PDO $db, int $id): array
 {
-    $sql = 'select * from wishes where $id = user_id';
+    // todo SQLセキュリティ対策必要
+    $sql = "select * from wishes where $id = user_id";
     $stmt = $db->query($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
