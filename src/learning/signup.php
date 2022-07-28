@@ -64,7 +64,7 @@ function validate(): array
         foreach ($errors as $error):
             echo $error;
             echo "<br>";
-        endforeach;;
+        endforeach;
     endif; ?>
 </span>
 <form action="" method="POST">

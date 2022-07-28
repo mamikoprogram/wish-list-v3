@@ -9,6 +9,6 @@ function render(string $template, array $vars = []): void
 function element(string $element, array $vars = []): void
 {
     extract($vars, EXTR_OVERWRITE);
-    require dirname(__FILE__) .
+    include dirname(__FILE__) .
         "/../templates/elements/{$element}.php";
 }

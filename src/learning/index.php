@@ -11,6 +11,10 @@ if (empty($user)) {
     exit;
 }
 
+$wishes = findWishByList($db, $_SESSION['id']);
+
+//$wishes = display($db);
+
 function getUserInfo(array $user): string
 {
     if (empty($user)) {
@@ -21,7 +25,7 @@ function getUserInfo(array $user): string
     );
 }
 
-$wishes = findWishByList($db, $_SESSION['id']);
+//$wishes = findWishByList($db, $_SESSION['id']);
 
 render('wish/list', [
     'user' => $user,

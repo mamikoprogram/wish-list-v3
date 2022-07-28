@@ -6,7 +6,9 @@
 </head>
 <body>
 <form method="post">
-    <input type="email">
+    <label>
+        <input type="email">
+    </label>
     <input type="submit">
 </form>
 </body>

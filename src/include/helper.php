@@ -12,7 +12,10 @@ function makeSecurePassword($password): string
     return sha1($password . SALT);
 }
 
-function makeCsrfToken()
+/**
+ * @return void
+ */
+function makeCsrfToken(): void
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return;

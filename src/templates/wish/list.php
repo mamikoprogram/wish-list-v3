@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @var array $wishes
+ * @var array $user
+ */
 ?>
 
 <?php
@@ -7,7 +10,7 @@ element('header', ['title' => 'Wish List']);
 ?>
 <p>こんにちは<?php
     echo getUserInfo($user); ?></p>
-<a href="new-wish.php">Wishを追加する</a>
+<a href="http://localhost:8080/new-wish.php">Wishを追加する</a>
 <table>
     <thead>
     <tr>
