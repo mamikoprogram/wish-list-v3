@@ -2,20 +2,31 @@
 
 require_once "../../include/initialize.php";
 
-$errors = array();
+$errors = register();
+render('wish/new', [
+    'errors' => $errors
+]);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = validate();
-    if (empty($errors)) {
-        $userId = $_SESSION['id'];
-        $db = db();
-        // todo insertの戻り値を適切に修正する（詳細ページ作成時）
-        $wish = insertWish($db, $_POST['myWish'], $_POST['memo'], $userId);
-        if (!empty($wish)) {
-            header('location:http://localhost:8080/index.php');
-            exit;
-        }
+function register(): ?array
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        return null;
     }
+
+    $errors = validate();
+    if (!empty($errors)) {
+        return $errors;
+    }
+
+    $userId = $_SESSION['id'];
+    $db = db();
+    // todo insertの戻り値を適切に修正する（詳細ページ作成時）
+    $wish = insertWish($db, $_POST['myWish'], $_POST['memo'], $userId);
+    if (!empty($wish)) {
+        header('location:http://localhost:8080/index.php');
+        exit;
+    }
+    die('システムエラー');
 }
 
 function validate(): array
@@ -28,7 +39,3 @@ function validate(): array
     }
     return $errors;
 }
-
-render('wish/new', [
-    'errors' => $errors
-]);
