@@ -7,10 +7,8 @@
 
 <?php
 element('header', ['title' => 'New Wish']); ?>
-<!--todo 未登録時のエラーメッセージが表示されない-->
 <?php
-element('error', ['error' => $errors]);
-var_dump($errors);
+element('error', ['errors' => $errors]);
 ?>
 <form method="post" action="http://localhost:8080/new-wish.php">
     <span class="item">My Wish:</span><br>
