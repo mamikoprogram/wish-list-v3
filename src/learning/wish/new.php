@@ -1,6 +1,6 @@
 <?php
 
-require_once "../include/initialize.php";
+require_once "../../include/initialize.php";
 
 $errors = array();
 

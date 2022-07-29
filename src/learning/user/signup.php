@@ -1,6 +1,6 @@
 <?php
 
-require_once "../include/initialize.php";
+require_once "../../include/initialize.php";
 
 $name = '';
 $email = '';
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($insert === false) {
             return;
         }
-        header('location: http://localhost:8080/login.php');
+        header('location: http://localhost:8080/user/login.php');
         exit;
     }
 }
@@ -53,7 +53,7 @@ function validate(): array
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Wish List ユーザー登録画面</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
 <h1>Wish List</h1>
@@ -76,6 +76,6 @@ function validate(): array
     <input type="password" name="password" id="password"><br>
     <input type="submit" value="ユーザー登録する">
 </form>
-<a href="login.php">ログイン画面に戻る</a>
+<a href="/user/login.php">ログイン画面に戻る</a>
 </body>
 </html>

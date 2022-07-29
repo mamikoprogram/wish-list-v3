@@ -10,7 +10,7 @@ element('header', ['title' => 'New Wish']); ?>
 <?php
 element('error', ['errors' => $errors]);
 ?>
-<form method="post" action="http://localhost:8080/new-wish.php">
+<form method="post" action="http://localhost:8080/wish/new.php">
     <span class="item">My Wish:</span><br>
     <label>
         <input type="text" name="myWish" placeholder="例）旅行に行く" maxlength="255">

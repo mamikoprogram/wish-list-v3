@@ -12,7 +12,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?php echo h($title) ?></title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
 <h1><?php echo h($title) ?></h1>

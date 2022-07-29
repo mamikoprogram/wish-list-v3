@@ -9,8 +9,8 @@
 element('header', ['title' => 'Wish List']);
 ?>
 <p>こんにちは<?php
-    echo getUserInfo($user); ?></p>
-<a href="http://localhost:8080/new-wish.php">Wishを追加する</a>
+    echo escapeUserInfo($user); ?></p>
+<a href="http://localhost:8080/wish/new.php">Wishを追加する</a>
 <table>
     <thead>
     <tr>

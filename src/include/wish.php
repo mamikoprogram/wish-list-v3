@@ -1,7 +1,5 @@
 <?php
 
-require_once "../include/initialize.php";
-
 function insertWish(PDO $db, string $subject, string $memo, int $userId): bool
 {
     $cols = [

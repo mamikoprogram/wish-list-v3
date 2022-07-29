@@ -23,3 +23,13 @@ function makeCsrfToken(): void
     $token = sha1(openssl_random_pseudo_bytes(16));
     $_SESSION['token'] = $token;
 }
+
+function escapeUserInfo(array $user): string
+{
+    if (empty($user)) {
+        return '';
+    }
+    return h(
+        "{$user['name']}【{$user['email']}】さん"
+    );
+}
