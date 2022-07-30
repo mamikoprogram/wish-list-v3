@@ -1,5 +1,37 @@
 <?php
 
+/**
+ * このファイルのフルパス
+ * /var/www/learning/wish/new.php
+ *
+ * このファイルのカレントディレクトリ
+ * /var/www/learning/wish
+ *
+ * このファイルのカレントURL
+ * /with/new.php
+ *
+ * このファイルの絶対URL
+ * http://localhost:8080/with/new.php
+ *
+ * ブラウザ上でindex.phpにアクセスさせる方法
+ * <a>タグや<form>タグで指定できるURL
+ *
+ * 絶対URL： http://localhost:8080/index.php
+ * 絶対URL： //localhost:8080/index.php
+ * ルートURL： /index.php
+ * 相対URL：../index.php
+ *
+ * ブラウザ上でlogin.phpにアクセスさせる方法
+ * <a>タグや<form>タグで指定できるURL
+ *
+ * 絶対URL： http://localhost:8080/user/login.php
+ * 絶対URL： //localhost:8080/user/login.php
+ * ルートURL： /user/login.php
+ * 相対URL：../user/login.php
+ *
+ */
+
+
 require_once "../../include/initialize.php";
 
 $errors = register();

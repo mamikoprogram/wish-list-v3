@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * このファイルのフルパス
+ * /var/www/learning/index.php
+ *
+ * このファイルのカレントディレクトリ
+ * /var/www/learning
+ *
+ * このファイルのカレントURL
+ * /index.php
+ *
+ * このファイルの絶対URL
+ * http://localhost:8080/index.php
+ */
+
 require_once "../include/initialize.php";
 $user = [];
 
