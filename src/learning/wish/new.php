@@ -29,6 +29,13 @@
  * ルートURL： /user/login.php
  * 相対URL：../user/login.php
  *
+ * 補足 絶対URLの違い
+ * 絶対URL： http://localhost:8080/index.php
+ * 絶対URL： //localhost:8080/index.php
+ *
+ * アクセスされた http / https の方法に従ってリンクを生成する方法
+ * 絶対URL： //localhost:8080/index.php
+ *
  */
 
 
