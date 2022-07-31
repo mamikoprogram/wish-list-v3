@@ -1,6 +1,8 @@
 <?php
 
-//XSS対策
+/**
+ * XSS対策
+ */
 function h($str): string
 {
     return htmlspecialchars($str, ENT_QUOTES, "UTF-8");
@@ -24,6 +26,11 @@ function makeCsrfToken(): void
     $_SESSION['token'] = $token;
 }
 
+/**
+ * ユーザー名をエスケープして表示
+ * @param array $user
+ * @return string
+ */
 function escapeUserInfo(array $user): string
 {
     if (empty($user)) {
