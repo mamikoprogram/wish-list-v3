@@ -1,19 +1,24 @@
 <?php
 
-/**
- * @param PDO $db
- * @param string $myWish
- * @param string $memo
- * @param int $userId
- * @return bool
- */
-
-function insertWish(PDO $db, string $myWish, string $memo, int $userId): bool
+function insertWish(PDO $db, string $subject, string $memo, int $userId): bool
 {
     $cols = [
-        'my_wish' => $myWish,
+        'subject' => $subject,
         'memo' => $memo,
         'user_id' => $userId,
     ];
     return insert($db, 'wishes', $cols);
+}
+
+/**
+ * @param PDO $db
+ * @param int $id
+ * @return array
+ * @throws Exception
+ */
+function findWishByList(PDO $db, int $id): array
+{
+    $sql = "select * from wishes where user_id = :id";
+    $stmt = select($db, $sql, [':id' => $id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

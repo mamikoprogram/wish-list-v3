@@ -1,6 +1,6 @@
 <?php
 
-require_once "../include/initialize.php";
+require_once "../../include/initialize.php";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = validate();
@@ -47,7 +47,7 @@ function validate(): array
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Wish List ログイン画面</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
 <h1>Wish List</h1>
@@ -70,6 +70,6 @@ endif; ?>
     echo $_SESSION['token']; ?>">
     <input type="submit" value="ログインする">
 </form>
-<a href="signup.php">新規ユーザー登録はこちら</a>
+<a href="/user/signup.php">新規ユーザー登録はこちら</a>
 </body>
 </html>

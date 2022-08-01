@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: db
--- 生成日時: 2022 年 7 月 07 日 03:04
+-- 生成日時: 2022 年 7 月 23 日 05:00
 -- サーバのバージョン： 5.7.36
 -- PHP のバージョン: 8.0.15
 
@@ -64,8 +64,13 @@ CREATE TABLE `wishes` (
 --
 
 INSERT INTO `wishes` (`id`, `subject`, `memo`, `completion`, `user_id`) VALUES
-                                                                            (12, '旅行に行く', 'ゆっくり温泉に入りた〜〜い', 0, 69),
-                                                                            (16, '長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish長いWish', '長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテ', 0, 69);
+                                                                            (20, 'テスト１', 'ユーザー抽出できているか？', 0, 7),
+                                                                            (21, 'テスト２', 'ユーザー毎の抽出ができているか？', 0, 8),
+                                                                            (29, '<script> alert(!) </script>', 'XSS 対策OK？', 0, 69),
+                                                                            (30, '長いwish長いwish長いwish長い', '長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いwish長い長いwish長いwish長いw', 0, 69),
+                                                                            (31, 'テスト４', '４のwish', 0, 10),
+                                                                            (32, 'テスト３', '旅行に行こう〜', 0, 9),
+                                                                            (33, 'テスト８', 'テストwish', 0, 69);
 
 --
 -- ダンプしたテーブルのインデックス
@@ -97,7 +102,7 @@ ALTER TABLE `users`
 -- テーブルの AUTO_INCREMENT `wishes`
 --
 ALTER TABLE `wishes`
-    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+    MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
