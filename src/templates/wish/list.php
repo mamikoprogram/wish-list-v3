@@ -27,8 +27,9 @@ element('header', ['title' => 'Wish List']);
         as $wish
     ): ?>
         <tr>
-            <td><?php
-                echo h(mb_substr($wish['subject'], 0, 10)); ?></td>
+<!--            todo wishのidを渡す-->
+            <td><a href="http://localhost:8080/wish/detail.php?id=<?php echo $wish['id']; ?>"><?php
+                echo h(mb_substr($wish['subject'], 0, 10)); ?></a></td>
             <td><?php
                 echo h(mb_substr($wish['memo'], 0, 10)); ?></td>
         </tr>

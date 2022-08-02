@@ -13,7 +13,7 @@ element('error', ['errors' => $errors]);
 <form method="post" action="http://localhost:8080/wish/new.php">
     <span class="item">My Wish:</span><br>
     <label>
-        <input type="text" name="myWish" placeholder="例）旅行に行く" maxlength="255">
+        <input class="txt" type="text" name="myWish" placeholder="例）旅行に行く" maxlength="255">
     </label>
     <span class="item">Memo:</span><br>
     <label for="memo"></label>
