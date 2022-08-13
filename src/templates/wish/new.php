@@ -19,7 +19,8 @@ element('error', ['errors' => $errors]);
     <label for="memo"></label>
     <textarea name="memo" id="memo" cols="20" rows="10" placeholder="例）夏までに貯金して沖縄でリゾートホテルに泊まる"
               maxlength="255"></textarea><br>
-    <input type="submit" value="Wishを追加">
+    <input class="btn-style" type="submit" value="Wishを追加">
 </form>
+<a href="http://localhost:8080/index.php">Wish Listへ戻る</a>
 <?php
 element('footer'); ?>
