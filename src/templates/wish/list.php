@@ -3,6 +3,7 @@
  * @var array $wishes
  * @var array $user
  */
+
 ?>
 
 <?php
@@ -10,13 +11,13 @@ element('header', ['title' => 'Wish List']);
 ?>
 <p>こんにちは<?php
     echo escapeUserInfo($user); ?></p>
-<a href="http://localhost:8080/wish/new.php">Wishを追加する</a>
+<a class="btn-style" href="http://localhost:8080/wish/new.php">Wishを追加する</a>
 <table>
     <thead>
     <tr>
         <th>My Wish</th>
         <th>Memo</th>
-        <th></th>
+        <th>detail</th>
         <th></th>
     </tr>
     </thead>
@@ -27,14 +28,16 @@ element('header', ['title' => 'Wish List']);
         as $wish
     ): ?>
         <tr>
-<!--            todo wishのidを渡す-->
-            <td><a href="http://localhost:8080/wish/detail.php?id=<?php echo $wish['id']; ?>"><?php
-                echo h(mb_substr($wish['subject'], 0, 10)); ?></a></td>
+            <td><?php
+                echo h(mb_substr($wish['subject'], 0, 10)); ?></td>
             <td><?php
                 echo h(mb_substr($wish['memo'], 0, 10)); ?></td>
+            <td><a class="btn-style" href="http://localhost:8080/wish/detail.php?id=<?php
+                echo $wish['id']; ?>">詳細</a></td>
         </tr>
     <?php
     endforeach; ?>
     </tbody>
 </table>
-<?php element('footer'); ?>
+<?php
+element('footer'); ?>

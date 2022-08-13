@@ -4,6 +4,7 @@ body {
     user-select: none;
     font-family: sans-serif;
 }
+
 .errormessage {
     color: red;
 }
@@ -56,13 +57,14 @@ tbody a:hover {
     text-decoration: underline;
 }
 
+/*todo テーブルの中のaタグの下線を消す（詳細ボタン）*/
 .btn-style {
     border-radius: 1mm;
     color: #333;
     text-align: center;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-    padding: 4px 12px;
-    margin: 16px auto;
+    padding: 2px 6px;
+    margin: 8px auto;
     display: inline-block;
     text-decoration: none;
     border: 1px;
