@@ -2,16 +2,16 @@
 
 require_once "../../include/initialize.php";
 
-//todo コントローラーに条件指定する
-//todo 必要であれば関数化する
-
-//Wish詳細を取得
-$id = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    return null;
+}
 $db = db();
-$userId = $_SESSION['id'];
-$sql = 'SELECT * FROM wishes WHERE id = :ID AND user_id = :USER_ID';
-$stmt = select($db, $sql, [':ID' => $id, ':USER_ID' => $userId]);
-$detail = $stmt->fetch(PDO::FETCH_ASSOC);
+$detail = getWishById($db, $_GET['id'], $_SESSION['id']);
+
+if (empty($detail)) {
+    header('location:http://localhost:8080/index.php');
+    exit;
+}
 
 render('wish/detail', [
     'id' => $_GET['id'],
