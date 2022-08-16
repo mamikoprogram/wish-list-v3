@@ -27,11 +27,8 @@ if (empty($user)) {
 
 $wishes = findWishByList($db, $_SESSION['id']);
 
-//$wishes = display($db);
-
-//$wishes = findWishByList($db, $_SESSION['id']);
-
 render('wish/list', [
     'user' => $user,
     'wishes' => $wishes
 ]);
+

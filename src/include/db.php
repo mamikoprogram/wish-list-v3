@@ -29,7 +29,9 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
  * @param string $table
  * @param array $cols
  * @return bool
+ * todo 詳細画面作成実装後にリターン値を修正
  */
+
 function insert(PDO $db, string $table, array $cols): bool
 {
     /*
