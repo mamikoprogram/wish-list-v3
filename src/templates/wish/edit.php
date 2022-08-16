@@ -16,18 +16,16 @@ element('header', ['title' => 'Edit Wish']); ?>
     <h2 class="item">My Wish:</h2><br>
     <label>
         <input class="txt" type="text" name="myWish" maxlength="255" value="<?php
-        echo $row['subject']; ?>">
+        echo h($row['subject']); ?>">
     </label>
     <h2 class="item">Memo:</h2><br>
     <label for="memo">
     <textarea name="memo" id="memo" cols="20" rows="10"
-              maxlength="255" <?php
-    echo $row['memo']; ?>></textarea>
+              maxlength="255"><?php
+        echo h($row['memo']); ?></textarea>
     </label><br>
     <input class=" btn-style" type="submit" value="更新">
 </form>
 <a href="http://localhost:8080/index.php">Wish Listへ戻る</a>
-<?php
-var_dump($row) ?>
 <?php
 element('footer'); ?>

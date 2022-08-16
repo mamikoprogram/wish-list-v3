@@ -1,6 +1,13 @@
 <?php
 
-function insertWish(PDO $db, string $subject, string $memo, int $userId): bool
+/**
+ * @param PDO $db
+ * @param string $subject
+ * @param string $memo
+ * @param int $userId
+ * @return int|null
+ */
+function insertWish(PDO $db, string $subject, string $memo, int $userId): ?int
 {
     $cols = [
         'subject' => $subject,
@@ -18,7 +25,7 @@ function insertWish(PDO $db, string $subject, string $memo, int $userId): bool
  */
 function findWishByList(PDO $db, int $userId): array
 {
-    $sql = "select * from wishes where user_id = :id";
+    $sql = "SELECT * FROM wishes WHERE user_id = :id";
     $stmt = select($db, $sql, [':id' => $userId]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -27,7 +34,7 @@ function findWishByList(PDO $db, int $userId): array
  * @param PDO $db
  * @param int $id
  * @param int $userId
- * @return mixed
+ * @return array
  * @throws Exception
  */
 function getWishById(PDO $db, int $id, int $userId) :array
