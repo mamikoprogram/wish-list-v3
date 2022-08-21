@@ -87,3 +87,10 @@ function insert(PDO $db, string $table, array $cols): ?int
 
     return (int)$db->lastInsertId();
 }
+
+//todo UPDATE直後に何行更新したかを取得する関数の作成
+function getNumRows(): int
+{
+
+}
+

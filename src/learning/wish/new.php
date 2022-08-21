@@ -59,7 +59,6 @@ function register(): ?array
 
     $userId = $_SESSION['id'];
     $db = db();
-    // todo insertの戻り値を適切に修正する（詳細ページ作成時）
     $wishId = insertWish($db, $_POST['myWish'], $_POST['memo'], $userId);
     if (!empty($wishId)) {
         header("location:http://localhost:8080/wish/detail.php?id=$wishId");

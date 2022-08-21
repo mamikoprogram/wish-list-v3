@@ -11,7 +11,6 @@ element('header', ['title' => 'Edit Wish']); ?>
 //element('error', ['errors' => $errors]);
 //?>
 
-<!--todo memoが上手く表示されない（取得はできている）-->
 <form method="post" action="http://localhost:8080/wish/edit.php">
     <h2 class="item">My Wish:</h2><br>
     <label>

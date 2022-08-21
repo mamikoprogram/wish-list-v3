@@ -5,11 +5,16 @@ require_once "../../include/initialize.php";
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     return null;
 }
-//todo 編集機能作業中
-try {
-    $db = db();
-    $row = getWishById($db, $_GET['id'], $_SESSION['id']);
-} catch (Exception $e) {
-}
+
+$db = db();
+$row = getWishById($db, $_GET['id'], $_SESSION['id']);
+
+//todo 関数を作って修正
+//if (!empty($row)) {
+//    $row = updateWish($db, $_GET['id'], $_SESSION['id']);
+//    header('location:http://localhost:8080/user/login.php');
+//    exit;
+//}
 
 render('wish/edit', ['row' => $row]);
+
