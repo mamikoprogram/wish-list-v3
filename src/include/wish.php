@@ -45,16 +45,15 @@ function getWishById(PDO $db, int $id, int $userId): array
 }
 
 /**
- * @param PDO $db
- * @param int $id
- * @param int $userId
- * @return array
+ * @param  PDO  $db
+ * @param  int  $id
+ * @param  int  $userId
+ *
+ * @return int|null
  * @throws Exception
- * todo db.phpに関数を作ってから修正
  */
-//function updateWish(PDO $db, int $id, int $userId) :array
-//{
-//    $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user";
-//    $stmt = select($db, $sql, ['id' => $id, 'user_id' => $userId]);
-//    return $stmt->fetch();
-//}
+function updateWish(PDO $db, int $id, int $userId) : ?int
+{
+    $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user";
+    return update($db, $sql, ['id' => $id, 'user_id' => $userId]);
+}

@@ -25,6 +25,32 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
 }
 
 /**
+ * @param  PDO  $db
+ * @param  string  $sql
+ * @param  array  $binds
+ *
+ * @return int|null
+ * @throws Exception
+ */
+function update(PDO $db, string $sql, array $binds = []): ?int
+{
+    $stmt = $db->prepare($sql);
+    if (false === $stmt) {
+        throw new Exception('sql error');
+    }
+    foreach ($binds as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+    $stmt->execute();
+
+    if (!$stmt->execute()) {
+        return null;
+    }
+
+    return $stmt->rowCount();
+}
+
+/**
  * @param PDO $db
  * @param string $table
  * @param array $cols
@@ -87,10 +113,11 @@ function insert(PDO $db, string $table, array $cols): ?int
 
     return (int)$db->lastInsertId();
 }
-
-//todo UPDATE直後に何行更新したかを取得する関数の作成
-function getNumRows(): int
-{
-
-}
-
+//
+////todo UPDATE直後に何行更新したかを取得する関数の作成
+/// この間数は利用しない
+//function getNumRows(): int
+//{
+//
+//}
+//
