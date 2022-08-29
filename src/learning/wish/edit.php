@@ -10,6 +10,10 @@ $db = db();
 $row = getWishById($db, $_GET['id'], $_SESSION['id']);
 
 //todo 関数を作って修正
+$aaa = getRowNums();
+if (!empty($aaa) {
+}
+
 //if (!empty($row)) {
 //    $row = updateWish($db, $_GET['id'], $_SESSION['id']);
 //    header('location:http://localhost:8080/user/login.php');

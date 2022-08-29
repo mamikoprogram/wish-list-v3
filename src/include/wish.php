@@ -45,13 +45,14 @@ function getWishById(PDO $db, int $id, int $userId): array
 }
 
 /**
- * @param PDO $db
- * @param int $id
- * @param int $userId
- * @return array
- * @throws Exception
  * todo db.phpに関数を作ってから修正
  */
+
+function updateWish () :array
+{
+    if()
+}
+
 //function updateWish(PDO $db, int $id, int $userId) :array
 //{
 //    $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user";

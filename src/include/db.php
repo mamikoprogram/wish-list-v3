@@ -89,8 +89,24 @@ function insert(PDO $db, string $table, array $cols): ?int
 }
 
 //todo UPDATE直後に何行更新したかを取得する関数の作成
-function getNumRows(): int
+function getRowNums(PDO $db, string $table, array $cols): ?int
 {
+    $values = [];
+    foreach ($cols as $key => $value) {
+        $values[] = ":{$key}";
+    }
+    $updateCols = implode(',', array_keys($cols));
+    $updateValues = implode(',', $values);
 
+    $sql = "UPDATE {$table} SET {$updateCols} = {$updateValues} WHERE 'id' = :id";
+
+    $stmt = $db->prepare($sql);
+    foreach ($cols as $key => $value) {
+        $stmt->bindValue(':' . $key, $value);
+    }
+
+    if (!$stmt->execute()) {
+        return null;
+    }
+    return $stmt->rowCount();
 }
-
