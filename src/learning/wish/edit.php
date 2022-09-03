@@ -10,15 +10,12 @@ $db = db();
 $row = getWishById($db, $_GET['id'], $_SESSION['id']);
 
 //todo 関数を作って修正
-$aaa = getRowNums();
-if (!empty($aaa) {
+$rows = getRowNums($db, wishes, ['subject', 'memo']);
+
+if (!empty($rows)) {
+    $row = updateWish($db, $_POST['id'], $_SESSION['id']);
+    header('location:http://localhost:8080/wish/detail.php');
+    exit;
 }
-
-//if (!empty($row)) {
-//    $row = updateWish($db, $_GET['id'], $_SESSION['id']);
-//    header('location:http://localhost:8080/user/login.php');
-//    exit;
-//}
-
 render('wish/edit', ['row' => $row]);
 
