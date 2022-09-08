@@ -89,6 +89,12 @@ function insert(PDO $db, string $table, array $cols): ?int
 }
 
 //todo UPDATE直後に何行更新したかを取得する関数の作成
+/**
+ * @param PDO $db
+ * @param string $table
+ * @param array $cols
+ * @return int|null
+ */
 function getRowNums(PDO $db, string $table, array $cols): ?int
 {
     $values = [];
