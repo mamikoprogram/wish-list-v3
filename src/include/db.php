@@ -95,7 +95,7 @@ function insert(PDO $db, string $table, array $cols): ?int
  * @param array $cols
  * @return int|null
  */
-function getRowNums(PDO $db, string $table, array $cols): ?int
+function getRowNums(PDO $db, string $table, array $cols, int $id): ?int
 {
     $values = [];
     foreach ($cols as $key => $value) {
@@ -104,8 +104,9 @@ function getRowNums(PDO $db, string $table, array $cols): ?int
     $updateCols = implode(',', array_keys($cols));
     $updateValues = implode(',', $values);
 
-    $sql = "UPDATE {$table} SET {$updateCols} = {$updateValues} WHERE 'id' = :id";
-
+//    todo idの値が渡せていないので修正
+    $sql = "UPDATE {$table} SET {$updateCols} = {$updateValues} WHERE 'id' = :ID";
+    $stmt = select($db, $sql, [':ID' => $id,]);
     $stmt = $db->prepare($sql);
     foreach ($cols as $key => $value) {
         $stmt->bindValue(':' . $key, $value);

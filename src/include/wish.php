@@ -52,9 +52,9 @@ function getWishById(PDO $db, int $id, int $userId): array
  * @return array
  * @throws Exception
  */
-function updateWish(PDO $db, int $id, int $userId): array
+function updateWish(PDO $db, string $subject, string $memo, int $id, int $userId): array
 {
     $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user";
-    $stmt = select($db, $sql, ['id' => $id, 'user_id' => $userId]);
+    $stmt = select($db, $sql, ['subject' => $subject, 'memo' => $memo, 'id' => $id, 'user_id' => $userId]);
     return $stmt->fetch();
 }
