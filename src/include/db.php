@@ -98,6 +98,9 @@ function insert(PDO $db, string $table, array $cols): ?int
 function update(PDO $db, string $sql, array $binds = []): ?int
 {
     $stmt = $db->prepare($sql);
+    if (false === $stmt) {
+        throw new Exception('sql error');
+    }
     foreach ($binds as $key => $value) {
         $stmt->bindValue($key, $value);
     }
