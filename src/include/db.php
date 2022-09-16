@@ -94,6 +94,7 @@ function insert(PDO $db, string $table, array $cols): ?int
  * @param string $sql
  * @param array $binds
  * @return int|null
+ * @throws Exception
  */
 function update(PDO $db, string $sql, array $binds = []): ?int
 {

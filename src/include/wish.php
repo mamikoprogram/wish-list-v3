@@ -45,7 +45,6 @@ function getWishById(PDO $db, int $id, int $userId): array
 }
 
 /**
- * todo db.phpに関数を作ってから修正
  * @param PDO $db
  * @param int $id
  * @param int $userId
@@ -53,6 +52,6 @@ function getWishById(PDO $db, int $id, int $userId): array
  */
 function updateWish(PDO $db, int $id, int $userId): ?int
 {
-    $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user";
+    $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user_id";
     return update($db, $sql, ['id' => $id, 'user_id' => $userId]);
 }
