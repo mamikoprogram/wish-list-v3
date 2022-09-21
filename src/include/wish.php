@@ -46,15 +46,15 @@ function getWishById(PDO $db, int $id, int $userId): array
 
 /**
  * @param PDO $db
- * @param string $id
+ * @param int $id
  * @param int $userId
  * @return int|null
  * @throws Exception
  */
 
-function updateWish(PDO $db, string $id, int $userId): ?int
+function updateWish(PDO $db, int $id, int $userId): ?int
 {
     $sql = "UPDATE wishes SET subject = :subject, memo = :memo WHERE id = :id AND user_id = :user_id";
 //    todo パラメーターのナンバーが一致しないので修正（数を合わせるか、updateの配列に直接代入する？）
-    return update($db, $sql, ['id' => $id, 'user_id' => $userId]);
+    return update($db, $sql, [':id' => $_POST['id'], ':user_id' => $_SESSION['id']]);
 }

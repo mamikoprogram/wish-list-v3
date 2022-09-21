@@ -105,6 +105,7 @@ function update(PDO $db, string $sql, array $binds = []): ?int
     foreach ($binds as $key => $value) {
         $stmt->bindValue($key, $value);
     }
+    var_dump($binds);
     $stmt->execute();
 
     if (!$stmt->execute()) {
