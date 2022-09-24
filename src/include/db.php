@@ -28,11 +28,11 @@ function select(PDO $db, string $sql, array $binds = []): PDOStatement
  * @param PDO $db
  * @param string $table
  * @param array $cols
- * @return bool
+ * @return int|null
  * todo 詳細画面作成実装後にリターン値を修正
  */
 
-function insert(PDO $db, string $table, array $cols): bool
+function insert(PDO $db, string $table, array $cols): ?int
 {
     /*
     $cols = [
@@ -81,5 +81,35 @@ function insert(PDO $db, string $table, array $cols): bool
         $stmt->bindValue(':' . $key, $value);
     }
 
-    return $stmt->execute();
+    if (!$stmt->execute()) {
+        return null;
+    }
+
+    return (int)$db->lastInsertId();
+}
+
+//todo UPDATE直後に何行更新したかを取得する関数の作成
+/**
+ * @param PDO $db
+ * @param string $sql
+ * @param array $binds
+ * @return int|null
+ * @throws Exception
+ */
+function update(PDO $db, string $sql, array $binds = [],): ?int
+{
+//    var_dump(func_get_args());
+    $stmt = $db->prepare($sql);
+    if (false === $stmt) {
+        throw new Exception('sql error');
+    }
+    foreach ($binds as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+//    executeはif文内で実行
+    if (!$stmt->execute()) {
+        return null;
+    }
+
+    return $stmt->rowCount();
 }

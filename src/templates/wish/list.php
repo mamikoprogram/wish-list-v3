@@ -18,7 +18,7 @@ element('header', ['title' => 'Wish List']);
         <th>My Wish</th>
         <th>Memo</th>
         <th>detail</th>
-        <th></th>
+        <th>edit</th>
     </tr>
     </thead>
     <tbody>
@@ -34,6 +34,8 @@ element('header', ['title' => 'Wish List']);
                 echo h(mb_substr($wish['memo'], 0, 10)); ?></td>
             <td><a class="btn-style" href="http://localhost:8080/wish/detail.php?id=<?php
                 echo $wish['id']; ?>">詳細</a></td>
+            <td><a class="btn-style" href="http://localhost:8080/wish/edit.php?id=<?php
+                echo $wish['id']; ?>">編集</a></td>
         </tr>
     <?php
     endforeach; ?>
