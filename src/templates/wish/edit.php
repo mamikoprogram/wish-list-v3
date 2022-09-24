@@ -2,7 +2,7 @@
 
 element('header', ['title' => 'Edit Wish']); ?>
 <form method="post" action="http://localhost:8080/wish/edit.php?id=<?php
-echo $row['id']; ?>>">
+echo $row['id']; ?>">
     <h2 class="item">My Wish:</h2><br>
     <label>
         <input class="txt" type="text" name="subject" maxlength="255" value="<?php

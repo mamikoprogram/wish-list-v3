@@ -46,17 +46,15 @@ function getWishById(PDO $db, int $id, int $userId): array
 
 /**
  * @param PDO $db
- * @param $subject
- * @param $memo
+ * @param string $subject
+ * @param string $memo
  * @param int $id
  * @param int $userId
  * @return int|null
- * @throws Exception todo 要エラー修正
+ * @throws Exception
  */
-function updateWish(PDO $db, $subject, $memo, int $id, int $userId): ?int
+function updateWish(PDO $db, string $subject, string $memo, int $id, int $userId): ?int
 {
     $sql = "UPDATE wishes SET subject=:subject, memo=:memo WHERE id = :id AND user_id = :user_id";
-    select($db, $sql, [':subject' => $subject, ':memo' => $memo]);
-    var_dump($sql);
-    return update($db, $sql, [':id' => $id, ':user_id' => $userId]);
+    return update($db, $sql, [':subject' => $subject , ':memo' => $memo, ':id' => $id, ':user_id' => $userId]);
 }

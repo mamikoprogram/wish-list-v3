@@ -96,8 +96,9 @@ function insert(PDO $db, string $table, array $cols): ?int
  * @return int|null
  * @throws Exception
  */
-function update(PDO $db, string $sql, array $binds = []): ?int
+function update(PDO $db, string $sql, array $binds = [],): ?int
 {
+//    var_dump(func_get_args());
     $stmt = $db->prepare($sql);
     if (false === $stmt) {
         throw new Exception('sql error');
@@ -105,9 +106,7 @@ function update(PDO $db, string $sql, array $binds = []): ?int
     foreach ($binds as $key => $value) {
         $stmt->bindValue($key, $value);
     }
-    var_dump($binds);
-    $stmt->execute();
-
+//    executeはif文内で実行
     if (!$stmt->execute()) {
         return null;
     }
