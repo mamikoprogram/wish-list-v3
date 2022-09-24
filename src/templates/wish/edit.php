@@ -5,7 +5,7 @@ element('header', ['title' => 'Edit Wish']); ?>
 echo $row['id']; ?>>">
     <h2 class="item">My Wish:</h2><br>
     <label>
-        <input class="txt" type="text" name="myWish" maxlength="255" value="<?php
+        <input class="txt" type="text" name="subject" maxlength="255" value="<?php
         echo h($row['subject']); ?>">
     </label>
     <h2 class="item">Memo:</h2><br>
