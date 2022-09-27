@@ -19,6 +19,7 @@ element('header', ['title' => 'Wish List']);
         <th>Memo</th>
         <th>detail</th>
         <th>edit</th>
+        <th>completion</th>
     </tr>
     </thead>
     <tbody>
@@ -36,6 +37,8 @@ element('header', ['title' => 'Wish List']);
                 echo $wish['id']; ?>">詳細</a></td>
             <td><a class="btn-style" href="http://localhost:8080/wish/edit.php?id=<?php
                 echo $wish['id']; ?>">編集</a></td>
+            <td><a class="btn-style" href="http://localhost:8080/wish/completion.php?id=<?php
+                echo $wish['id']; ?>">完了</a></td>
         </tr>
     <?php
     endforeach; ?>
