@@ -3,21 +3,25 @@
 require_once "../../include/initialize.php";
 
 $db = db();
-
-//todo $userIdを入力する
-$completion = completionWish($db, $_GET['id'], );
+$completion = completionWish($db, $_GET['id'], $_SESSION['id']);
 
 
-if (isset($completion)) {
-    header('location:http://localhost:8080/index.php');
-    exit;
+if (empty($completion)) {
+    echo 'sqlエラー';
 }
 
+header('location:http://localhost:8080/index.php');
+exit;
 
-// todo 作業中（userIdの値を取得する関数）
-function getuserId (PDO $db, string $sql, int $id, int $userId) {
-    $sql = "SELECT * FROM users WHERE 'id' = :id AND 'user_id' = :user_id";
-    select($db,$sql,['id' => $_GET['id'], 'user_id' => $userId]);
-
-    return
+/**
+ * @param PDO $db
+ * @param int $id
+ * @param int $userId
+ * @return int|null
+ * @throws Exception
+ */
+function completionWish(PDO $db, int $id, int $userId): ?int
+{
+    $sql = "UPDATE wishes SET completion = :completion WHERE id = :id AND user_id = :user_id";
+    return update($db, $sql, ['completion' => 1, 'id' => $id, 'user_id' => $userId]);
 }
