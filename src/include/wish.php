@@ -58,3 +58,22 @@ function updateWish(PDO $db, string $subject, string $memo, int $id, int $userId
     $sql = "UPDATE wishes SET subject=:subject, memo=:memo WHERE id = :id AND user_id = :user_id";
     return update($db, $sql, [':subject' => $subject, ':memo' => $memo, ':id' => $id, ':user_id' => $userId]);
 }
+
+/**
+ * @param PDO $db
+ * @param int $id
+ * @param int $userId
+ * @return int|null
+ * @throws Exception
+ */
+function completionWishNum(PDO $db, int $id, int $userId): ?int
+{
+    $sql = "UPDATE wishes SET completion = :completion WHERE id = :id AND user_id = :user_id";
+    return update($db, $sql, ['completion' => 1, 'id' => $id, 'user_id' => $userId]);
+}
+
+//todo  作業中
+function completionWish(PDO $db): array
+{
+    $sql = "SELECT * FROM wishes WHERE completion = 1";
+    $

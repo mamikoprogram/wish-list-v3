@@ -12,6 +12,7 @@ element('header', ['title' => 'Wish List']);
 <p>こんにちは<?php
     echo escapeUserInfo($user); ?></p>
 <a class="btn-style" href="http://localhost:8080/wish/new.php">Wishを追加する</a>
+<a class="btn-style" href="http://localhost:8080/wish/completion.php">達成したWishを見る</a>
 <table>
     <thead>
     <tr>
