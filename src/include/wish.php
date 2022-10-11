@@ -71,3 +71,16 @@ function completionWishNum(PDO $db, int $id, int $userId): ?int
     $sql = "UPDATE wishes SET completion = :completion WHERE id = :id AND user_id = :user_id";
     return update($db, $sql, ['completion' => 1, 'id' => $id, 'user_id' => $userId]);
 }
+
+/**
+ * @param PDO $db
+ * @param int $userId
+ * @return array
+ * @throws Exception
+ */
+function completionWish(PDO $db, int $userId): array
+{
+    $sql = "SELECT * FROM wishes WHERE user_id = :id AND completion = :completion";
+    $stmt = select($db, $sql, [':id' => $userId, ':completion' => 1]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
