@@ -12,7 +12,7 @@ element('header', ['title' => 'Wish List']);
 <p>こんにちは<?php
     echo escapeUserInfo($user); ?></p>
 <a class="btn-style" href="http://localhost:8080/wish/new.php">Wishを追加する</a>
-<a class="btn-style" href="http://localhost:8080/wish/completion.php">達成したWishを見る</a>
+<a class="btn-style" href="http://localhost:8080/wish/completion-list.php">達成したWishを見る</a>
 <table>
     <thead>
     <tr>
@@ -38,7 +38,7 @@ element('header', ['title' => 'Wish List']);
                 echo $wish['id']; ?>">詳細</a></td>
             <td><a class="btn-style" href="http://localhost:8080/wish/edit.php?id=<?php
                 echo $wish['id']; ?>">編集</a></td>
-            <td><a class="btn-style" href="http://localhost:8080/wish/completion.php?id=<?php
+            <td><a class="btn-style" href="http://localhost:8080/wish/completion-btn.php?id=<?php
                 echo $wish['id']; ?>">完了</a></td>
         </tr>
     <?php

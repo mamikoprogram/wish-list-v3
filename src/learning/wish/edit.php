@@ -8,7 +8,6 @@ $db = db();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $rowNum = updateWish($db, $_POST['subject'], $_POST['memo'], $_POST['id'], $_SESSION['id']);
-        var_dump($rowNum);
     } catch (Exception $e) {
     }
 }
@@ -23,9 +22,9 @@ if (!empty($rowNum)) {
 //$_REQUEST = get > post
 try {
     $row = getWishById($db, $_REQUEST['id'], $_SESSION['id']);
-render('wish/edit', [
-    'id' => $_GET['id'],
-    'row' => $row,
-]);
+    render('wish/edit', [
+        'id' => $_GET['id'],
+        'row' => $row,
+    ]);
 } catch (Exception $e) {
 }

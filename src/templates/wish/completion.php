@@ -25,6 +25,8 @@ element('header', ['title' => 'Completion Wish']); ?>
                 echo h(mb_substr($comWish['subject'], 0, 10)); ?></td>
             <td><?php
                 echo h(mb_substr($comWish['memo'], 0, 10)); ?></td>
+            <td><a class="btn-style" href="http://localhost:8080/wish/detail.php?id=<?php
+                echo $comWish['id']; ?>">詳細</a></td>
         </tr>
     <?php
     endforeach; ?>
