@@ -5,10 +5,8 @@
  */
 
 ?>
-
 <?php
-element('header', ['title' => 'Wish List']);
-?>
+element('header', ['title' => 'Wish List']); ?>
 <p>こんにちは<?php
     echo escapeUserInfo($user); ?></p>
 <a class="btn-style" href="http://localhost:8080/wish/new.php">Wishを追加する</a>
@@ -36,10 +34,14 @@ element('header', ['title' => 'Wish List']);
                 echo h(mb_substr($wish['memo'], 0, 10)); ?></td>
             <td><a class="btn-style" href="http://localhost:8080/wish/detail.php?id=<?php
                 echo $wish['id']; ?>">詳細</a></td>
-            <td><a class="btn-style" href="http://localhost:8080/wish/edit.php?id=<?php
-                echo $wish['id']; ?>">編集</a></td>
-            <td><a class="btn-style" href="http://localhost:8080/wish/completion-btn.php?id=<?php
-                echo $wish['id']; ?>">完了</a></td>
+            <?php
+            if (empty($comNum)): ?>
+                <td><a class="btn-style" href="http://localhost:8080/wish/edit.php?id=<?php
+                    echo $wish['id']; ?>">編集</a></td>
+                <td><a class="btn-style" href="http://localhost:8080/wish/completion-btn.php?id=<?php
+                    echo $wish['id']; ?>">完了</a></td>
+            <?php
+            endif; ?>
         </tr>
     <?php
     endforeach; ?>
