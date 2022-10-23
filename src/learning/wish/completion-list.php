@@ -5,7 +5,7 @@ require_once "../../include/initialize.php";
 $db = db();
 
 //達成したWishを見る処理
-$Wishes = completionWish($db, $_SESSION['id']);
+$wishes = findWishByList($db, $_SESSION['id'], !empty($_GET['completion']));
 render('wish/list', [
-    'Wishes' => $Wishes,
+    'wishes' => $wishes
 ]);
