@@ -8,11 +8,11 @@
 <?php
 element('header', ['title' => 'Wish List']); ?>
 <?php
-if (!isset($_GET['completion'])): ?>
+if (empty($_GET['completion'])): ?>
     <p>こんにちは<?php
         echo escapeUserInfo($user); ?></p>
     <a class="btn-style" href="http://localhost:8080/wish/new.php">Wishを追加する</a>
-    <a class="btn-style" href="http://localhost:8080/wish/completion-list.php?completion=1">達成したWishを見る</a>
+    <a class="btn-style" href="http://localhost:8080/index.php?completion=1">達成したWishを見る</a>
 <?php
 else: ?>
     <h2>Best wishes</h2>
