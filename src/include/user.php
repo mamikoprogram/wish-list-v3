@@ -61,3 +61,12 @@ function insertUser(PDO $db, ?string $name, string $email, string $password): ?i
     ];
     return insert($db, 'users', $cols);
 }
+
+/**
+ * @return void
+ */
+function killSession(): void
+{
+    $_SESSION = [];
+    session_destroy();
+}

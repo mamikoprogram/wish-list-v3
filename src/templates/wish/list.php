@@ -62,6 +62,8 @@ endif; ?>
 if (!empty($_GET['completion'])): ?>
     <a href="http://localhost:8080/index.php">Wish Listへ戻る</a>
 <?php
-endif; ?>
+else: ?>
+<a href="http://localhost:8080/user/logout.php">ログアウト</a>
+<?php endif; ?>
 <?php
 element('footer'); ?>
