@@ -15,6 +15,7 @@
  */
 
 require_once "../include/initialize.php";
+
 $user = [];
 
 $db = db();
@@ -25,10 +26,9 @@ if (empty($user)) {
     exit;
 }
 
-$wishes = findWishByList($db, $_SESSION['id']);
+$wishes = findWishByList($db, $_SESSION['id'], !empty($_GET['completion']));
 
 render('wish/list', [
     'user' => $user,
-    'wishes' => $wishes
+    'wishes' => $wishes,
 ]);
-

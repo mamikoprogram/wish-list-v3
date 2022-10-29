@@ -77,5 +77,5 @@ function validate(): array
     <input type="submit" value="ユーザー登録する">
 </form>
 <a href="/user/login.php">ログイン画面に戻る</a>
-</body>
-</html>
+<?php
+element('footer'); ?>
