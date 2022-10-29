@@ -76,8 +76,8 @@ tbody a:hover {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-p.detail {
-    max-width: 60%;
-    text-align: center;
-    display: inline-block;
+footer p {
+    font-size: 2px;
+    color: #a1a0a1;
+    margin-top: 40px;
 }

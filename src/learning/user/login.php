@@ -71,5 +71,5 @@ endif; ?>
     <input type="submit" value="ログインする">
 </form>
 <a href="/user/signup.php">新規ユーザー登録はこちら</a>
-</body>
-</html>
+<?php
+element('footer'); ?>
