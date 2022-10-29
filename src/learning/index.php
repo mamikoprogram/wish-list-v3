@@ -15,8 +15,7 @@
  */
 
 require_once "../include/initialize.php";
-//以下の処理を入れるとエラーが出ます
-//session_start();
+
 $user = [];
 
 $db = db();
